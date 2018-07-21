@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 优先级从高到低分别是 ERROR、WARN、INFO、DEBUG。通过在这里定义的级别，您可以控制到应用程序中相应级别的日志信息的开关。 
+	比如在这里定义了INFO级别， 则应用程序中所有DEBUG级别的日志信息将不被打印出来 -->
+<configuration scan="true" scanPeriod="60 seconds">
+	<property name="LOGFILE_HOME" value="/usr/local/tomcat/logs" />
+	<timestamp key="byDay" datePattern="yyyyMMdd" />
+
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%X{req.remoteHost} [%date] %X{seqID} [%-5level] [%thread]
+				[%-8class{1}:%L] - %m%n</pattern>
+			<immediateFlush>false</immediateFlush>
+		</encoder>
+	</appender>
+
+	<!-- 订购请求处理结果日志，用于统计，一天一份，最大60天 -->
+	<appender name="platform"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${LOGFILE_HOME}/platform.log</File>
+		<Append>true</Append>
+		<encoder>
+			<pattern>[%date]- %m%n</pattern>
+			<immediateFlush>false</immediateFlush>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOGFILE_HOME}/platform.log.%d{yyyy-MM-dd}
+			</fileNamePattern>
+			<maxHistory>60</maxHistory>
+		</rollingPolicy>
+	</appender>
+	
+	<!-- 系统异常日志，所有异常统一捕获，用此log输出，一月一份，最大3份 -->
+	<appender name="exception"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${LOGFILE_HOME}/platform_exception.log</File>
+		<Append>true</Append>
+		<encoder>
+			<pattern>%X{req.remoteHost} [%date] %X{seqID} [%-5level] [%thread] [%-8class{1}:%L] - %m%n</pattern>
+			<immediateFlush>false</immediateFlush>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOGFILE_HOME}/platform_exception.log.%d{yyyy-MM}</fileNamePattern>
+			<maxHistory>3</maxHistory>
+		</rollingPolicy>
+	</appender>	
+
+	<!-- 以下是IBATIS调试使用 -->
+	<logger name="com.ibatis" level="DEBUG" />
+	<logger name="com.ibatis.common.jdbc.SimpleDataSource" level="DEBUG" />
+	<logger name="com.ibatis.common.jdbc.ScriptRunner" level="DEBUG" />
+	<logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="DEBUG" />
+	<logger name="java.sql.Connection" level="DEBUG" />
+	<logger name="java.sql.Statement" level="DEBUG" />
+	<logger name="java.sql.PreparedStatement" level="DEBUG" />
+	<logger name="java.sql.ResultSet" level="DEBUG" />
+
+	<logger name="org.springframework" level="INFO" />
+	<logger name="com.opensymphony" level="INFO" />
+	<logger name="org.apache" level="INFO" />
+
+	<!-- 开发调试阶段使用DEBUG，部署生产环境用INFO -->
+	<root level="DEBUG">
+		<appender-ref ref="stdout" />
+	</root>
+
+	<logger name="platform" level="DEBUG">
+		<appender-ref ref="platform" />
+	</logger>
+	
+	<logger name="exception" level="INFO">
+		<appender-ref ref="exception" />
+	</logger>
+</configuration>
