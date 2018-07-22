@@ -1,7 +1,7 @@
-package com.anl.iot.service;
+package com.anl.card.service;
 
-import com.anl.iot.persistence.po.DataDictionary;
-import com.anl.iot.persistence.po.SelectGroup;
+import com.anl.card.persistence.po.DataDictionary;
+import com.anl.card.persistence.po.SelectGroup;
 
 import java.util.List;
 

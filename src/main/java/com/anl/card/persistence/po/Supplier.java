@@ -1,4 +1,4 @@
-package com.anl.iot.persistence.po;
+package com.anl.card.persistence.po;
 
 import java.util.*;
 

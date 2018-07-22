@@ -1,6 +1,6 @@
-package com.anl.iot.service;
+package com.anl.card.service;
 
-import com.anl.iot.persistence.po.Supplier;
+import com.anl.card.persistence.po.Supplier;
 /** 
  * 类名: SupplierService
  * 创建日期: 

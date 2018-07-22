@@ -1,7 +1,7 @@
-package com.anl.iot.persistence.mapper;
+package com.anl.card.persistence.mapper;
 
 
-import com.anl.iot.persistence.po.DataDictionary;
+import com.anl.card.persistence.po.DataDictionary;
 
 /**
  * 类名: DataDictionary

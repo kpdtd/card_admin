@@ -1,4 +1,4 @@
-package com.anl.iot.persistence.mapper;
+package com.anl.card.persistence.mapper;
 
 import java.util.List;
 import java.util.Map;

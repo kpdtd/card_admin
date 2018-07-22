@@ -1,4 +1,4 @@
-package com.anl.iot.constant;
+package com.anl.card.constant;
 
 public class Constant {
 
