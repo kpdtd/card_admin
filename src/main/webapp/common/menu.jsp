@@ -73,7 +73,7 @@
 				<span class="title">上游管理</span> <span class="arrow"></span>
 		</a>
 			<ul class="sub-menu" style="display: none;">
-				<li id="agency"><a href="<%=request.getContextPath()%>/agency/getPage">上游运营商信息</a></li>
+				<li id="agency"><a href="<%=request.getContextPath()%>/supplier/getPage">上游运营商信息</a></li>
 				<li id="goodsLibrary"><a href="<%=request.getContextPath()%>/goodsLibrary/getPage">商品库管理</a></li>
 			</ul></li>
 		<li class=""><a href="javascript:;"> <i class=" icon-list-ul"></i>
