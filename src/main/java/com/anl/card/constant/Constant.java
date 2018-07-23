@@ -21,30 +21,8 @@ public class Constant {
 	
 	/******** 运营商管理 *********/
 	public static final String MENU_SUPPLIER = "supplier";
-	public static final String MENU_GOODS_LIBRARY = "goodsLibrary";
-	/********卡管理**********/
-	public static final String MENU_IOT_CARD = "iotCard";
-	
-	
-	
-	
-	/***********活动管理************/
-	public static final String MENU_ACTIVITY = "activity";
-	public static final String MENU_ACTIVITY_DETAIL = "activityDetail";
-	public static final String MENU_TEMPLATE = "template";
-	public static final String MENU_ROTATE = "rotate";
-	public static final String MENU_USER_SIGN = "userSign";
-	public static final String MENU_ACTBOX = "actBox";
-	public static final String MENU_ACTBOXGIFT = "actBoxGift";
-	public static final String MENU_ACTUSERBOX = "actUserBox";
-	
-	/***********用户管理************/
-	public static final String MENU_USER_BASE = "userBase";
-	public static final String MENU_USER_CHARGERECORD = "userChargeRecord";
-	public static final String MENU_USER_ORDER = "userOrder";
-	
-	
-	
+
 	/******** 系统管理菜单 *********/
 	public static final String MENU_DICTIONARY = "dictionary";
+
 }

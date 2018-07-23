@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-<%-- <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %> --%>  
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
@@ -52,9 +51,9 @@
 								<div id="sample_2_wrapper" class="dataTables_wrapper form-inline" role="grid">
 									<div class="row-fluid">
 										<div class="input-append">
-											<%-- <shiro:hasPermission name="/dictionary/add">   --%>
+
 												<a id="add" class="btn green" ><i class="icon-plus"></i> 添加</a>
-											<%-- </shiro:hasPermission>  --%>
+
 										</div>
 									</div>
 									<div class="row-fluid">
@@ -141,9 +140,9 @@
 					"mDataProp" : "id",
 					"fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
 						var html = "";
-						/* <shiro:hasPermission name="/dictionary/editDictionary">  */ 
+
 							html += '<a href="javascript:;" onclick="edit('+oData.id+')">编辑</a>';
-						/* </shiro:hasPermission>  */
+
 						return $(nTd).html(html);	
 					}
 				} ],
