@@ -19,8 +19,8 @@ public class Constant {
 
 	public static final String MENU_STRING = "menu";// 控制左侧菜单显示效果
 	
-	/******** 上游管理 *********/
-	public static final String MENU_AGENCY = "agency";
+	/******** 运营商管理 *********/
+	public static final String MENU_SUPPLIER = "supplier";
 	public static final String MENU_GOODS_LIBRARY = "goodsLibrary";
 	/********卡管理**********/
 	public static final String MENU_IOT_CARD = "iotCard";

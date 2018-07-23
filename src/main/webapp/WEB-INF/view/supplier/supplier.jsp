@@ -1,8 +1,5 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-<%-- <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %> --%>  
-
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
@@ -53,34 +50,32 @@
 							<div class="portlet-body">
 								<div id="sample_2_wrapper" class="dataTables_wrapper form-inline" role="grid">
 									<div class="row-fluid">
-										<div class="input-append">
-											<%-- <shiro:hasPermission name="/dictionary/add">   --%>
-												<a id="add" class="btn green" ><i class="icon-plus"></i> 添加</a>
-											<%-- </shiro:hasPermission>  --%>
-										</div>
+										<%--<div class="input-append">--%>
+											<div class="control-group">
+												<a id="add" class="btn green"><i class="icon-plus"></i> 添加</a>
+												<select id="state" class="m-wrap xsmall">
+													<option value=""></option>
+													<c:forEach var="state" items="${stateList}">
+														<option value="${state.id }">${state.name}</option>
+													</c:forEach>
+												</select>
+												<input class="m-wrap medium" size="10" id="company" type="text" placeholder="公司名称">
+												<button onclick="initPage();" class="btn red">
+													<i class="icon-search"></i> 查询
+												</button>
+											</div>
+										<%--</div>--%>
 									</div>
 									<div class="row-fluid">
 										<table style="table-layout: fixed;" class="table table-striped table-bordered table-hover table-full-width dataTable" id="portlet_Tables"
 											aria-describedby="sample_2_info">
 											<thead>
 												<tr>
-													<th>	id</th>
-													<th>	company</th>
-													<th>	sign_key</th>
-													<th>	invoke_token</th>
-													<th>	ec_code</th>
-													<th>	identity</th>
-													<th>	linker</th>
-													<th>	phone</th>
-													<th>	mail</th>
-													<th>	state</th>
-													<th>	bank_info</th>
-													<th>	business</th>
-													<th>	ec_extension_info</th>
-													<th>	attachment</th>
-													<th>	info</th>
-													<th>	creator</th>
-													<th>	create_time</th>
+													<th>ID</th>
+													<th>公司名称</th>
+													<th>企业编码</th>
+													<th>状态</th>
+													<th>创建时间</th>
 													<th>操作</th>
 												</tr>
 											</thead>
@@ -110,7 +105,13 @@
 		function edit(id){
 			App.Modal.load("./add",{'id' : id},{"title":"修改上游"});
 		}
-		function initPage() {
+
+        $('#state').select2({
+            placeholder: "状态",
+            allowClear: true
+        });
+
+        function initPage() {
 			var oTable = $('#portlet_Tables').dataTable({
 				"bLengthChange" : false, //改变每页显示数据数量 可选的每页展示的数据数量，默认为10条
 				"iDisplayLength" : 50, // 默认煤业显示条数
@@ -121,187 +122,69 @@
 				"sDom": "<'row-fluid'<f>r>t<'row-fluid'<'span6'i><'span6'p>>", // table布局
 		        "aaSorting" : [[ 0, "desc" ]], 
 				"fnServerParams" : function(aoData) {
+                    aoData.push({ "name" : "state", "value" : $("#state").val()});
+                    aoData.push({ "name" : "company", "value" : $("#company").val()});
 				},
 				"sServerMethod" : "POST",
 				"sAjaxSource" : "getList",
 				"aoColumns" : [{
-		                    "sClass" : "center",
-		                    "mDataProp" : "id",
-		                    "mRender" : function(obj){
-		                        if(obj == null){
-		                            return "";
-		                        }else{
-		                            return obj;
-		                        }
-		                    }
-		                },{
-		                    "sClass" : "center",
-		                    "mDataProp" : "company",
-		                    "mRender" : function(obj){
-		                        if(obj == null){
-		                            return "";
-		                        }else{
-		                            return obj;
-		                        }
-		                    }
-		                },{
-		                    "sClass" : "center",
-		                    "mDataProp" : "signKey",
-		                    "mRender" : function(obj){
-		                        if(obj == null){
-		                            return "";
-		                        }else{
-		                            return obj;
-		                        }
-		                    }
-		                },{
-		                    "sClass" : "center",
-		                    "mDataProp" : "invokeToken",
-		                    "mRender" : function(obj){
-		                        if(obj == null){
-		                            return "";
-		                        }else{
-		                            return obj;
-		                        }
-		                    }
-		                },{
-		                    "sClass" : "center",
-		                    "mDataProp" : "ecCode",
-		                    "mRender" : function(obj){
-		                        if(obj == null){
-		                            return "";
-		                        }else{
-		                            return obj;
-		                        }
-		                    }
-		                },{
-		                    "sClass" : "center",
-		                    "mDataProp" : "identity",
-		                    "mRender" : function(obj){
-		                        if(obj == null){
-		                            return "";
-		                        }else{
-		                            return obj;
-		                        }
-		                    }
-		                },{
-		                    "sClass" : "center",
-		                    "mDataProp" : "linker",
-		                    "mRender" : function(obj){
-		                        if(obj == null){
-		                            return "";
-		                        }else{
-		                            return obj;
-		                        }
-		                    }
-		                },{
-		                    "sClass" : "center",
-		                    "mDataProp" : "phone",
-		                    "mRender" : function(obj){
-		                        if(obj == null){
-		                            return "";
-		                        }else{
-		                            return obj;
-		                        }
-		                    }
-		                },{
-		                    "sClass" : "center",
-		                    "mDataProp" : "mail",
-		                    "mRender" : function(obj){
-		                        if(obj == null){
-		                            return "";
-		                        }else{
-		                            return obj;
-		                        }
-		                    }
-		                },{
-		                    "sClass" : "center",
-		                    "mDataProp" : "state",
-		                    "mRender" : function(obj){
-		                        if(obj == null){
-		                            return "";
-		                        }else{
-		                            return obj;
-		                        }
-		                    }
-		                },{
-		                    "sClass" : "center",
-		                    "mDataProp" : "bankInfo",
-		                    "mRender" : function(obj){
-		                        if(obj == null){
-		                            return "";
-		                        }else{
-		                            return obj;
-		                        }
-		                    }
-		                },{
-		                    "sClass" : "center",
-		                    "mDataProp" : "business",
-		                    "mRender" : function(obj){
-		                        if(obj == null){
-		                            return "";
-		                        }else{
-		                            return obj;
-		                        }
-		                    }
-		                },{
-		                    "sClass" : "center",
-		                    "mDataProp" : "ecExtensionInfo",
-		                    "mRender" : function(obj){
-		                        if(obj == null){
-		                            return "";
-		                        }else{
-		                            return obj;
-		                        }
-		                    }
-		                },{
-		                    "sClass" : "center",
-		                    "mDataProp" : "attachment",
-		                    "mRender" : function(obj){
-		                        if(obj == null){
-		                            return "";
-		                        }else{
-		                            return obj;
-		                        }
-		                    }
-		                },{
-		                    "sClass" : "center",
-		                    "mDataProp" : "info",
-		                    "mRender" : function(obj){
-		                        if(obj == null){
-		                            return "";
-		                        }else{
-		                            return obj;
-		                        }
-		                    }
-		                },{
-		                    "sClass" : "center",
-		                    "mDataProp" : "creator",
-		                    "mRender" : function(obj){
-		                        if(obj == null){
-		                            return "";
-		                        }else{
-		                            return obj;
-		                        }
-		                    }
-		                },{
-		                    "sClass" : "center",
-		                    "mDataProp" : "createTime",
-		                    "mRender" : function(obj){
-		                        if(obj == null){
-		                            return "";
-		                        }else{
-		                            return obj;
-		                        }
-		                    }
-		                },{
+                    "sClass" : "center",
+                    "mDataProp" : "id",
+                    "mRender" : function(obj){
+                        if(obj == null){
+                            return "";
+                        }else{
+                            //我这里做个简单的示范
+                            return obj;
+                        }
+                    }
+                }, {
+					"sClass" : "center",
+					"mDataProp" : "company",
+					"mRender" : function(obj){
+						if(obj == null){
+							return "";
+						}else{
+							//我这里做个简单的示范
+		                     return obj;
+						}
+	               }
+				}, {
+					"sClass" : "center",
+					"mDataProp" : "ecCode",
+					"mRender" : function(obj){
+						if(obj == null){
+							return "";
+						}else{
+							return obj;
+						}
+					}
+				},{
+					"sClass" : "center",
+					"mDataProp" : "state",
+					"mRender" : function(obj){
+						if(obj == 1){
+							return "启用";
+						}else {
+		                     return "冻结";
+						}
+	               }
+				} ,{
+					"sClass" : "center",
+					"mDataProp" : "createTime",
+					"mRender" : function(obj){
+						if(obj == null){
+							return "";
+						}else{
+		                     return obj;
+						}
+	               }
+				} , {
 					"sClass" : "center",
 					"mDataProp" : "id",
 					"fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
 						var html = "";
-						<%--  <shiro:hasPermission name="/dictionary/editDictionary">  --%> 
 							html += '<a href="javascript:;" onclick="edit('+oData.id+')">编辑</a>';
-							<%--  </shiro:hasPermission>  --%> 
 						return $(nTd).html(html);	
 					}
 				} ],

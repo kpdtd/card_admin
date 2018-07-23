@@ -44,11 +44,12 @@ public class BaseController {
 	protected DataDictionaryService dataDictionaryService;
 
 
-//	protected String getUsername() {
+	protected String getUsername() {
 //		Subject subject = SecurityUtils.getSubject();
 //		SysUsers user = (SysUsers) subject.getPrincipal();
 //		return user.getUserAccount();
-//	}
+		return "test";
+	}
 
 	/**
 	 * 关闭窗口并且刷新页面
