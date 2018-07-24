@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>IOT管理 | 首页</title>
+<title>CARD管理 | 首页</title>
 <%@ include file="/common/css.jsp"%>
 </head>
 <body class="page-header-fixed page-footer-fixed">
