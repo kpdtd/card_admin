@@ -2,7 +2,11 @@ package com.anl.card.controller;
 
 import java.util.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.anl.card.persistence.po.SelectGroup;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +28,7 @@ public class CardOwnerController extends BaseController {
 	CardOwnerService cardOwnerService;
 	
 	@RequestMapping("getPage")
-	public String getPage() throws Exception {
+	public String getPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		List<SelectGroup> stateList = dataDictionaryService.getValueListByKey("PUBLISH_STATE");
 		request.setAttribute("stateList",stateList);
 		return "cardOwner/cardOwner";
@@ -32,7 +36,7 @@ public class CardOwnerController extends BaseController {
 	
 	@RequestMapping("getList")
 	@ResponseBody
-	public void getList() throws Exception{
+	public void getList(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		Map<String,Object> model = new HashMap<String,Object>();
 		String state=request.getParameter("state");
 		String company=request.getParameter("company");
@@ -42,14 +46,14 @@ public class CardOwnerController extends BaseController {
 		if(StringUtils.isNotBlank(company)){
 			model.put("company",company);
 		}
-		pageProperties(model);
+		pageProperties(request, response, model);
 		int count = cardOwnerService.count(model);
 		recordsTotal = count;
 		// 分页显示上面查询出的数据结果
 		List<CardOwner> data = cardOwnerService.getListByMap(model);
 		recordsFiltered = recordsTotal;
 		recordsDisplay = data.size();
-		this.writerToClient(data);
+		this.writerToClient(data, response);
 	}
 	
 	/*@RequestMapping("detail")
@@ -63,7 +67,7 @@ public class CardOwnerController extends BaseController {
 	}*/
 	
 	@RequestMapping("add")
-	public String add(Integer id) throws Exception{
+	public String add(HttpServletRequest request, HttpServletResponse respons, Integer id) throws Exception{
 		try {
 			if (id!=null) {
 			CardOwner cardOwner = cardOwnerService.getById(id);
@@ -80,7 +84,7 @@ public class CardOwnerController extends BaseController {
 		}
 	}
 	@RequestMapping("addCardOwner")
-	public void addCardOwner(CardOwner cardOwner) throws Exception{
+	public void addCardOwner(HttpServletRequest request, HttpServletResponse response, CardOwner cardOwner) throws Exception{
 		try {
 			cardOwner.setCreator(getUsername());
 			if (Objects.isNull(cardOwner.getId())) {

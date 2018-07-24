@@ -1,22 +1,29 @@
 package com.anl.card.controller;
 
-import com.anl.card.persistence.po.Card;
-import com.anl.card.persistence.po.SelectGroup;
-import com.anl.card.persistence.po.Supplier;
-import com.anl.card.persistence.po.SupplierPool;
-import com.anl.card.service.CardService;
-import com.anl.card.service.SupplierPoolService;
-import com.anl.card.service.SupplierService;
-import com.anl.card.vo.SupplierPoolExt;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.sql.SQLException;
-import java.util.*;
-import java.util.stream.Collectors;
+import com.anl.card.persistence.po.Supplier;
+import com.anl.card.persistence.po.SupplierPool;
+import com.anl.card.service.CardService;
+import com.anl.card.service.SupplierPoolService;
+import com.anl.card.service.SupplierService;
+import com.anl.card.vo.SupplierPoolExt;
 
 /**
  * 类名: SupplierPoolControllersupplierPool
@@ -40,23 +47,23 @@ public class SupplierPoolController extends BaseController {
 
     @RequestMapping("getList")
     @ResponseBody
-    public void getList() throws Exception {
+    public void getList(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Map<String, Object> model = new HashMap<String, Object>();
-        pageProperties(model);
+        pageProperties(request, response, model);
         int count = supplierPoolService.count(model);
         recordsTotal = count;
         // 分页显示上面查询出的数据结果
         List<SupplierPool> data = supplierPoolService.getListByMap(model);
         recordsFiltered = recordsTotal;
         recordsDisplay = data.size();
-        this.writerToClient(data);
+        this.writerToClient(data, response);
     }
 
     @RequestMapping("getListByCondition")
     @ResponseBody
-    public void getListByCondition() throws Exception {
+    public void getListByCondition(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Map<String, Object> model = new HashMap<String, Object>();
-        pageProperties(model);
+        pageProperties(request, response, model);
         int count = supplierPoolService.count(model);
         recordsTotal = count;
         // 分页显示上面查询出的数据结果
@@ -81,7 +88,7 @@ public class SupplierPoolController extends BaseController {
         }
         recordsFiltered = recordsTotal;
         recordsDisplay = data.size();
-        this.writerToClient(data);
+        this.writerToClient(data, response);
     }
 
 	/*@RequestMapping("detail")
@@ -95,7 +102,7 @@ public class SupplierPoolController extends BaseController {
 	}*/
 
     @RequestMapping("add")
-    public String add(Integer id) throws Exception {
+    public String add(HttpServletRequest request, HttpServletResponse response, Integer id) throws Exception {
         try {
             if (id != null) {
                 SupplierPool supplierPool = supplierPoolService.getById(id);
@@ -112,7 +119,7 @@ public class SupplierPoolController extends BaseController {
     }
 
     @RequestMapping("addSupplierPool")
-    public void addSupplierPool(SupplierPool supplierPool) throws Exception {
+    public void addSupplierPool(HttpServletRequest request, HttpServletResponse response, SupplierPool supplierPool) throws Exception {
         try {
             supplierPool.setCreateTime(new Date());
             supplierPool.setUpdateTime(new Date());

@@ -100,13 +100,13 @@
 			</a>
 			<ul class="sub-menu">
 				<li>
-					<a class="" href="#"> 库存管理</a>
+					<a class="" href="<%=request.getContextPath()%>/card/getPage"> 库存管理</a>
 				</li>
 				<li>
 					<a class="" href="#"> 注销卡管理</a>
 				</li>
 				<li>
-					<a class="" href="<%=request.getContextPath()%>/supplier/getPage"> 卡批量管理</a>
+					<a class="" href="<%=request.getContextPath()%>/batchProcessing/getPage"> 卡批量管理</a>
 				</li>
 			</ul>
 		</li>

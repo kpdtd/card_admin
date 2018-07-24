@@ -1,11 +1,14 @@
 package com.anl.card.controller;
 
-import com.anl.card.constant.Constant;
-import com.anl.card.persistence.po.SelectGroup;
-import com.anl.card.persistence.po.Supplier;
-import com.anl.card.service.DataDictionaryService;
-import com.anl.card.service.SupplierService;
-import com.anl.card.util.FileUtils;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.*;
+import com.anl.card.constant.Constant;
+import com.anl.card.persistence.po.SelectGroup;
+import com.anl.card.persistence.po.Supplier;
+import com.anl.card.service.DataDictionaryService;
+import com.anl.card.service.SupplierService;
+import com.anl.card.util.FileUtils;
 
 /** 
  * 类名: SupplierController
@@ -29,7 +37,7 @@ public class SupplierController extends BaseController {
 	DataDictionaryService dataDictionaryService;
 	
 	@RequestMapping(value="getPage")
-	public String getPage() throws Exception {
+	public String getPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setAttribute("menu", Constant.MENU_SUPPLIER);
 		List<SelectGroup> stateList = dataDictionaryService.getValueListByKey("PUBLISH_STATE");
 		request.setAttribute("stateList",stateList);
@@ -38,7 +46,7 @@ public class SupplierController extends BaseController {
 	
 	@RequestMapping(value="getList")
 	@ResponseBody
-	public void getList() throws Exception{
+	public void getList(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		Map<String,Object> model = new HashMap<String,Object>();
 		String state = request.getParameter("state");
 		if(StringUtils.isNotBlank(state)){
@@ -48,18 +56,18 @@ public class SupplierController extends BaseController {
 		if(StringUtils.isNotBlank(company)){
 			model.put("company",company);
 		}
-		pageProperties(model);
+		pageProperties(request, response, model);
 		int count = supplierService.count(model);
 		recordsTotal = count;
 		// 分页显示上面查询出的数据结果
 		List<Supplier> data = supplierService.getListByMap(model);
 		recordsFiltered = recordsTotal;
 		recordsDisplay = data.size();
-		this.writerToClient(data);
+		this.writerToClient(data, response);
 	}
 	
 	@RequestMapping(value="add")
-	public String add(Integer id) throws Exception{
+	public String add(HttpServletRequest request, HttpServletResponse response, Integer id) throws Exception{
 		request.setAttribute("menu", Constant.MENU_SUPPLIER);
 		if(id!=null){
 			Supplier supplier = supplierService.getById(id);
@@ -72,7 +80,7 @@ public class SupplierController extends BaseController {
 		return "supplier/supplierAdd";
 	}
 	@RequestMapping(value="addSupplier")
-	public void addSupplier(Supplier supplier,MultipartFile attachmentFile) throws Exception{
+	public void addSupplier(HttpServletRequest request, HttpServletResponse response, Supplier supplier,MultipartFile attachmentFile) throws Exception{
 		try {
 			// 先判断是否有图片上传
 			if (attachmentFile != null) {

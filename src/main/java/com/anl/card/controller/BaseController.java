@@ -35,8 +35,6 @@ public class BaseController {
 	protected int recordsTotal; // 总记录数
 	protected int recordsFiltered; //
 	protected int recordsDisplay; //
-	protected HttpServletRequest request;
-	protected HttpServletResponse response;
 	protected HttpSession session;
 	public static final boolean SUCCESS = true;
 	public static final boolean FAIL = false;
@@ -65,12 +63,6 @@ public class BaseController {
 	 */
 	protected static final String RESULT_TYPE_FUNCTION = "function";
 
-	@ModelAttribute
-	public void setReqAndRes(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.session = request.getSession();
-	}
 	// 图片存放地址获取
 	public String getImgFileURL(){
 		DataDictionary dic = dataDictionaryService.getDicByKey(Constant.IMG_SAVE_URL);
@@ -87,7 +79,7 @@ public class BaseController {
 	 * 
 	 * @param respData
 	 */
-	protected void writerToClient(String respData) {
+	protected void writerToClient(String respData, HttpServletResponse response) {
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter writer = null;
 		try {
@@ -99,7 +91,7 @@ public class BaseController {
 		}
 	}
 
-	protected void writerToClient(List<?> data) {
+	protected void writerToClient(List<?> data, HttpServletResponse response) {
 		Map<String, Object> respData = new HashMap<String, Object>();
 		respData.put("data", data);
 		respData.put("length", iDisplayLength);
@@ -141,9 +133,9 @@ public class BaseController {
 	 * 
 	 * @param map
 	 */
-	protected void pageProperties(Map<String, Object> map) {
-		map.put("startPage", getStart());
-		map.put("pageSize", getIDisplayLength());
+	protected void pageProperties(HttpServletRequest request, HttpServletResponse response, Map<String, Object> map) {
+		map.put("startPage", getStart(request, response));
+		map.put("pageSize", getIDisplayLength(request, response));
 	}
 
 	/**
@@ -151,15 +143,15 @@ public class BaseController {
 	 * 
 	 * @return
 	 */
-	protected void groupSortMap(Map<String, Object> map) {
+	protected void groupSortMap(Map<String, Object> map, HttpServletRequest request, HttpServletResponse response) {
 		String sortCol = request.getParameter("iSortCol_0");// 点击排序列的数组序号
 		String sSortDir_0 = request.getParameter("sSortDir_0"); // 点击拍序列的排序方式desc
 																// asc
 		String mDataProp_ = request.getParameter("mDataProp_" + sortCol); // 获取拍序列的属性
 		map.put("prop", StringUtil.humpToLine(mDataProp_));
 		map.put("sort", sSortDir_0);
-		map.put("startPage", getStart());
-		map.put("pageSize", getIDisplayLength());
+		map.put("startPage", getStart(request, response));
+		map.put("pageSize", getIDisplayLength(request, response));
 	}
 	
 	/**
@@ -168,7 +160,7 @@ public class BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	protected Map<String,Object> fileUpload(String serverSavePath,String name) throws Exception {
+	protected Map<String,Object> fileUpload(HttpServletRequest request, HttpServletResponse response, String serverSavePath,String name) throws Exception {
 		Map<String,Object> map = null;
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		CommonsMultipartFile orginalFile = (CommonsMultipartFile) multipartRequest.getFile(name);// 表单中对应的文件名；
@@ -333,9 +325,8 @@ public class BaseController {
 		return (SysUsers) subject.getPrincipal();
 	}*/
 	
-	public int getStart() {
+	public int getStart(HttpServletRequest request, HttpServletResponse response) {
 		String iDisplayStart = request.getParameter("iDisplayStart");
-
 		if (StringUtils.isBlank(iDisplayStart)) {
 			return start;
 		} else {
@@ -343,7 +334,7 @@ public class BaseController {
 		}
 	}
 
-	public int getIDisplayLength() {
+	public int getIDisplayLength(HttpServletRequest request, HttpServletResponse response) {
 		String length = request.getParameter("iDisplayLength");
 		if (StringUtils.isBlank(length)) {
 			return iDisplayLength;
