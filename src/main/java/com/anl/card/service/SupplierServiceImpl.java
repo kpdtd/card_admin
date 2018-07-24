@@ -4,7 +4,6 @@ package com.anl.card.service;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,6 +51,6 @@ public class SupplierServiceImpl implements SupplierService {
 	public int count(Map<String, Object> condition) throws SQLException {
 		return supplierMapper.count(condition);
 	}
-	
+
 }
 
