@@ -67,11 +67,7 @@
 											<%-- </shiro:hasPermission>  --%>
 										</div>
 										<div class="control-group">
-											<strong style="color:red">
-												重要说明1<br/>
-												重要说明2<br/>
-												重要说明3<br/>
-											</strong>
+											<strong style="color: red"> 重要说明1<br /> 重要说明2<br /></strong>
 										</div>
 									</div>
 									<div class="row-fluid">
@@ -80,18 +76,18 @@
 											aria-describedby="sample_2_info">
 											<thead>
 												<tr>
-													<input type="checkbox" class="checkboxes" value="1" id="checkboxes" />
-													<th>id</th>
-													<th>运营商</th>
-													<th>归属方</th>
-													<th>ICCID</th>
-													<th>MSISDN</th>
-													<th>IMSI</th>
-													<th>卡状态</th>
-													<th>移动套餐</th>
-													<th>激活时间</th>
-													<th>入库批次</th>
-													<th>操作</th>
+													<th><input type="checkbox" class="checkboxes" value="1" id="checkboxes" /></th>
+													<th nowrap="nowrap">id</th>
+													<th nowrap="nowrap">运营商</th>
+													<th nowrap="nowrap">归属方</th>
+													<th nowrap="nowrap">ICCID</th>
+													<th nowrap="nowrap">MSISDN</th>
+													<th nowrap="nowrap">IMSI</th>
+													<th nowrap="nowrap">卡状态</th>
+													<th nowrap="nowrap">移动套餐</th>
+													<th nowrap="nowrap">激活时间</th>
+													<th nowrap="nowrap">入库批次</th>
+													<th nowrap="nowrap">操作</th>
 												</tr>
 											</thead>
 										</table>
@@ -131,6 +127,7 @@
 					.dataTable(
 							{
 								"bLengthChange" : false, //改变每页显示数据数量 可选的每页展示的数据数量，默认为10条
+								"scrollX": true,
 								"iDisplayLength" : 50, // 默认煤业显示条数
 								"bDestroy" : true,
 								"bServerSide" : true, // 使用服务器端处理
@@ -225,22 +222,23 @@
 											"sClass" : "center",
 											"mDataProp" : "cardState",
 											"mRender" : function(obj) {
-												if(obj == 1){
-					                            return '测试期';
-					                        }else if(obj == 2){
-					                            return '沉默期';
-					                        }else if(obj == 3){
-					                            return '正使用';
-					                        }else if(obj == 4){
-					                            return '停机';
-					                        }else if(obj == 5){
-					                            return '销户';
-					                        }else if(obj == 6){
-					                            return '预约销户';
-					                        }else if(obj == 0){
-					                            return '白卡';
-					                        }else{
-					                            return '未定义';
+													if(obj == 1){
+						                            		return '测试期';
+							                        }else if(obj == 2){
+							                            return '沉默期';
+							                        }else if(obj == 3){
+							                            return '正使用';
+							                        }else if(obj == 4){
+							                            return '停机';
+							                        }else if(obj == 5){
+							                            return '销户';
+							                        }else if(obj == 6){
+							                            return '预约销户';
+							                        }else if(obj == 0){
+							                            return '白卡';
+							                        }else{
+							                            return '未定义';
+													}
 											}
 										},
 										{

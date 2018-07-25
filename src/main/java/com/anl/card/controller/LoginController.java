@@ -11,6 +11,8 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.anl.card.constant.Constant;
+
 @Controller
 @RequestMapping("/login")
 public class LoginController extends BaseController {
@@ -33,6 +35,7 @@ public class LoginController extends BaseController {
 //				}
 //			}
 //            request.getSession().setAttribute("loginUser", data);
+
             setJsonSuccess(response, null, "index/getPage", "url");
 			//未添加权限管理时登录
 			/*SysUsers users = sysUsersService.findUserByUserName(sysUsers.getUserAccount());
