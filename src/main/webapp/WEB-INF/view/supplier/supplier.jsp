@@ -166,7 +166,7 @@
 						if(obj == 1){
 							return "启用";
 						}else {
-		                     return "冻结";
+		                     return "停用";
 						}
 	               }
 				} ,{
