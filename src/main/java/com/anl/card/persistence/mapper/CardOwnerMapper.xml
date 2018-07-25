@@ -88,7 +88,7 @@
 				AND id = #{id}
 			</if>
 			<if test="company != null">
-				AND company = #{company}
+				AND company LIKE '%${company}%'
 			</if>
 			<if test="username != null">
 				AND username = #{username}
@@ -130,7 +130,7 @@
 				AND id = #{id}
 			</if>
 			<if test="company != null">
-				AND company = #{company}
+				AND company LIKE '%${company}%'
 			</if>
 			<if test="username != null">
 				AND username = #{username}
