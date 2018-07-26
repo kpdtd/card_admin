@@ -67,7 +67,7 @@ public class CardOwnerController extends BaseController {
 	}*/
 	
 	@RequestMapping("add")
-	public String add(HttpServletRequest request, HttpServletResponse respons, Integer id) throws Exception{
+	public String add(HttpServletRequest request, HttpServletResponse response, Integer id) throws Exception{
 		try {
 			if (id!=null) {
 			CardOwner cardOwner = cardOwnerService.getById(id);

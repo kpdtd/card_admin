@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +70,8 @@ public class DictionaryController extends BaseController {
 	@RequestMapping("addDictionary")
 	public void insert(HttpServletRequest request, HttpServletResponse response, DataDictionary dictionary) throws Exception {
 		try {
+			dictionary.setCreateTime(new Date());
+			dictionary.setUpdateTime(new Date());
 			dataDictionaryService.insert(dictionary);
 			setJsonSuccess(response, null, "添加成功",RESULT_TYPE_CLOSE_BOX_FUNCTION);
 		}
@@ -81,6 +84,7 @@ public class DictionaryController extends BaseController {
 	@RequestMapping("editDictionary")
 	public void update(HttpServletRequest request, HttpServletResponse response, DataDictionary dictionary) throws Exception {
 		try {
+			dictionary.setUpdateTime(new Date());
 			dataDictionaryService.update(dictionary);
 			setJsonSuccess(response, null, "修改成功",RESULT_TYPE_CLOSE_BOX_FUNCTION);
 		}

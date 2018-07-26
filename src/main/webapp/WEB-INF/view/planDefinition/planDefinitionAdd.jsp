@@ -56,7 +56,7 @@
 			</div>
 			
 			<div class="control-group">
-				<label class="control-label" for="firstName"><span class="required">*</span>	单位计价(元)</label>
+				<label class="control-label" for="firstName"><span class="required">*</span>	单位计价(分)</label>
 				<div class="controls">
 					<input type="text" class="m-wrap span10" name="flowUnitPrice" 
 						 value="${planDefinition.flowUnitPrice}">
