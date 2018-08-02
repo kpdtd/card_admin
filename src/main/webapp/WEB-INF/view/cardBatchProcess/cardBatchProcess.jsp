@@ -14,6 +14,20 @@
 <!-- BEGIN HEAD -->
 <head>
 <style type="text/css">
+/* 
+	https://www.cnblogs.com/hdwang/p/7146434.html
+	datatabe横向滚动条，不好用
+	#tableArea .dataTables_wrapper {
+    position: relative;
+    clear: both;
+    zoom: 1;
+    overflow-x: auto;
+}
+
+#tableArea table{
+    width: 800px;
+} */
+
 </style>
 </head>
 <!-- END HEAD -->
@@ -37,7 +51,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-list"></i>
-								<a href="javascript:;">卡库存管理</a>
+								<a href="javascript:;">卡批量管理</a>
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
@@ -50,7 +64,30 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<!-- BEGIN EXAMPLE TABLE PORTLET-->
-						<div class="portlet box blue" id="portlet">
+						<div class="portlet box light-grey" id="portlet">
+							<div class="row-fluid">
+								<div class="alert alert-block alert-info fade in">
+									<%-- <shiro:hasPermission name="/dictionary/add">   --%>
+									<button class="btn black" id='batchStockIn'>
+										<i class="icon-plus"></i> 批量入库
+									</button>
+									&nbsp&nbsp&nbsp&nbsp
+									<button class="btn black">
+										<i class="icon-plus"></i> 批量发卡
+									</button>
+									&nbsp&nbsp&nbsp&nbsp
+									<button class="btn black">
+										<i class="icon-plus"></i> 批量变更套餐
+									</button>
+									&nbsp&nbsp&nbsp&nbsp
+									<button class="btn black">
+										<i class="icon-plus"></i> 批量销号
+									</button>
+									<!-- <a href="#" class="btn blue"><i class="icon-plus"></i> 批量状态变更</a> -->
+									<%-- </shiro:hasPermission>  --%>
+								</div>
+							</div>
+
 							<div class="portlet-title">
 								<div class="caption">
 									<i class="icon-th"></i>列表
@@ -59,35 +96,20 @@
 							<div class="portlet-body">
 								<div id="sample_2_wrapper" class="dataTables_wrapper form-inline" role="grid">
 									<div class="row-fluid">
-										<div class="input-append">
-											<%-- <shiro:hasPermission name="/dictionary/add">   --%>
-											<a id="add" class="btn green">
-												<i class="icon-plus"></i> 添加
-											</a>
-											<%-- </shiro:hasPermission>  --%>
-										</div>
-										<div class="control-group">
-											<strong style="color: red"> 重要说明1<br /> 重要说明2<br /></strong>
-										</div>
-									</div>
-									<div class="row-fluid">
-										<table style="table-layout: fixed"
+										<table style="table-layout: fixed;white-space: nowrap;"
 											class="table table-striped table-bordered table-hover table-full-width dataTable" id="portlet_Tables"
-											aria-describedby="sample_2_info" >
+											aria-describedby="sample_2_info">
 											<thead>
 												<tr>
-													<th><input type="checkbox" class="checkboxes" value="1" id="checkboxes" /></th>
-													<th nowrap="nowrap">id</th>
-													<th nowrap="nowrap">运营商</th>
-													<th nowrap="nowrap">归属方</th>
-													<th nowrap="nowrap">ICCID</th>
-													<th nowrap="nowrap">MSISDN</th>
-													<th nowrap="nowrap">IMSI</th>
-													<th nowrap="nowrap">卡状态</th>
-													<th nowrap="nowrap">移动套餐</th>
-													<th nowrap="nowrap">激活时间</th>
-													<th nowrap="nowrap">入库批次</th>
-													<th nowrap="nowrap">操作</th>
+													<th nowrap="nowrap">批次号</th>
+													<th nowrap="nowrap">动作</th>
+													<th nowrap="nowrap">数量</th>
+													<th nowrap="nowrap">处理状态</th>
+													<th nowrap="nowrap">操作人</th>
+													<!-- <th nowrap="nowrap">备注</th> -->
+													<th nowrap="nowrap">开始时间</th>
+													<th nowrap="nowrap">结束时间</th>
+													<th nowrap="nowrap">原始文件</th>
 												</tr>
 											</thead>
 										</table>
@@ -107,21 +129,26 @@
 			TableAdvanced.init();
 			initPage();
 			FormComponents.init();
-			$('.btn.green').click(function() {
-				App.Modal.load('./add', {}, {
-					'title' : '增加卡信息'
+			$('#batchStockIn').click(function() {
+				App.Modal.load('./getCardStockInPage', {}, {
+					'title' : '批量登记'
 				});
 			});
-
 		});
 
 		function edit(id) {
-			App.Modal.load("./add", {
+			App.Modal.load("./getCardStockInPage", {
 				'id' : id
 			}, {
-				"title" : "修改卡信息"
+				"title" : "批量登记"
 			});
 		}
+
+		function downloads(id) {
+			var url = "./download?id=" + id;
+			location.href = url;
+		}
+
 		function initPage() {
 			var oTable = $('#portlet_Tables')
 					.dataTable(
@@ -136,25 +163,38 @@
 								"sDom" : "<'row-fluid'<f>r>t<'row-fluid'<'span6'i><'span6'p>>", // table布局
 								"aaSorting" : [ [ 0, "desc" ] ],
 								"fnServerParams" : function(aoData) {
-									aoData.push({ "name" : "iccid", "value" : $("#iccid").val()});
-									aoData.push({ "name" : "supplierId", "value" : $("#supplierId").val() });
-									aoData.push({ "name" : "cardOwnerId", "value" : $("#cardOwnerId").val() });
-									aoData.push({ "name" : "cardState", "value" : $("#cardState").val() });
-									aoData.push({ "name" : "batchNumber", "value" : $("#batchNumber").val() });
 								},
 								"sServerMethod" : "POST",
 								"sAjaxSource" : "getList",
 								"aoColumns" : [
 										{
-						                    "sClass" : "center",
-						                    "mDataProp" : "",
-						                    "mRender" : function(obj){
-												return '<input type="checkbox" class="checkboxes_choose" name="checkboxes_choose" value="'+obj+'" />';
-						                    }
-						                },
-										{
+											"sWidth": "100px",
 											"sClass" : "center",
-											"mDataProp" : "id",
+											"mDataProp" : "code",
+											"mRender" : function(obj) {
+												if (obj == null) {
+													return "";
+												} else {
+													return obj;
+												}
+											}
+										},
+										{
+											"sWidth": "60px",
+											"sClass" : "center",
+											"mDataProp" : "action",
+											"mRender" : function(obj) {
+												if (obj == null) {
+													return "";
+												} else {
+													return obj;
+												}
+											}
+										},
+										{
+											"sWidth": "30px",
+											"sClass" : "center",
+											"mDataProp" : "number",
 											"mRender" : function(obj) {
 												if (obj == null) {
 													return "";
@@ -165,85 +205,45 @@
 										},
 										{
 											"sClass" : "center",
-											"mDataProp" : "supplierName",
+											"mDataProp" : "state",
 											"mRender" : function(obj) {
 												if (obj == null) {
 													return "";
 												} else {
-													return obj;
-												}
-											}
-										},
-										{
-											"sClass" : "center",
-											"mDataProp" : "cardOwnerName",
-											"mRender" : function(obj) {
-												if (obj == null) {
-													return "";
-												} else {
-													return obj;
-												}
-											}
-										},
-										{
-											"sClass" : "center",
-											"mDataProp" : "iccid",
-											"mRender" : function(obj) {
-												if (obj == null) {
-													return "";
-												} else {
-													return obj;
-												}
-											}
-										},
-										{
-											"sClass" : "center",
-											"mDataProp" : "msisdn",
-											"mRender" : function(obj) {
-												if (obj == null) {
-													return "";
-												} else {
-													return obj;
-												}
-											}
-										},
-										{
-											"sClass" : "center",
-											"mDataProp" : "imsi",
-											"mRender" : function(obj) {
-												if (obj == null) {
-													return "";
-												} else {
-													return obj;
-												}
-											}
-										},
-										{
-											"sClass" : "center",
-											"mDataProp" : "cardState",
-											"mRender" : function(obj) {
-													if(obj == 1){
-						                            		return '测试期';
-							                        }else if(obj == 2){
-							                            return '沉默期';
-							                        }else if(obj == 3){
-							                            return '正使用';
-							                        }else if(obj == 4){
-							                            return '停机';
-							                        }else if(obj == 5){
-							                            return '销户';
-							                        }else if(obj == 6){
-							                            return '预约销户';
-							                        }else if(obj == 0){
-							                            return '白卡';
-							                        }else{
-							                            return '未定义';
+													if (obj == 0) {
+														return '正处理';
+													} else if (obj == 1) {
+														return '成功';
 													}
+												}
 											}
 										},
 										{
 											"sClass" : "center",
-											"mDataProp" : "poolName",
+											"mDataProp" : "operator",
+											"mRender" : function(obj) {
+												if (obj == null) {
+													return "";
+												} else {
+													return obj;
+												}
+											}
+										},
+/* 										{
+											"sClass" : "center",
+											"mDataProp" : "comment",
+											"mRender" : function(obj) {
+												if (obj == null) {
+													return "";
+												} else {
+													return obj;
+												}
+											}
+										}, */
+										{
+											"sWidth": "110px",
+											"sClass" : "center",
+											"mDataProp" : "startTime",
 											"mRender" : function(obj) {
 												if (obj == null) {
 													return "";
@@ -253,19 +253,9 @@
 											}
 										},
 										{
+											"sWidth": "110px",
 											"sClass" : "center",
-											"mDataProp" : "activationTime",
-											"mRender" : function(obj) {
-												if (obj == null) {
-													return "";
-												} else {
-													return obj;
-												}
-											}
-										},
-										{
-											"sClass" : "center",
-											"mDataProp" : "batchCode",
+											"mDataProp" : "endTime",
 											"mRender" : function(obj) {
 												if (obj == null) {
 													return "";
@@ -280,22 +270,12 @@
 											"fnCreatedCell" : function(nTd,
 													sData, oData, iRow, iCol) {
 												var html = "";
-											<%--  <shiro:hasPermission name="/dictionary/editDictionary">  --%>
-												html += '<a href="javascript:;" onclick="edit('+ oData.id +')">编辑</a>';
-											<%--  </shiro:hasPermission>  --%>
-												return $(nTd).html(html);
+	<%--  <shiro:hasPermission name="/dictionary/editDictionary">  --%>
+		html += '<a href="./download?id=' + oData.id +'">下载</a>';
+	<%--  </shiro:hasPermission>  --%>
+		return $(nTd).html(html);
 											}
-										},{
-						                    "sClass" : "center",
-						                    "mDataProp" : "id",
-						                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-						                        var html = "";
-						                        <%-- shiro:hasPermission name="/card/add"> --%>
-						                        html += '<a href="javascript:;" onclick="detailPage('+oData.id+')">详情</a>';
-						                        <%-- </shiro:hasPermission> --%>
-						                        return $(nTd).html(html);
-						                    }
-						                }],
+										} ],
 								"sPaginationType" : "bootstrap",
 								"oLanguage" : {
 									"sProcessing" : "处理中...",

@@ -2,7 +2,7 @@ package com.anl.card.persistence.po;
 
 import java.util.*;
 
-public class Card {
+public class Card<T> {
 	private Integer id;
 	private Integer supplierId;
 	private Integer cardOwnerId;
