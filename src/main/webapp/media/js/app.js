@@ -1203,13 +1203,15 @@ var App = function () {
         	           	App.Tips.info('数据正在处理......',{autoHide:false,hideClose:true});
         			},
         			"success": function(json){
+//        				alert('44数据提交发生错误......'+json.msg);
         				App.Ajax.resolve(json,opt.fn,opt.errfn);
         			},
         			"complete":function(xhr,status){
         				form.data('send','false');
         				if(opt.completefn && opt.completefn instanceof Function) opt.completefn();
                   	},
-        			"error": function (xhr, error, thrown) {
+        			"error": function (xhr, error, thrown,json) {
+//        				alert('44数据提交发生错误......'+json.msg);
         				App.Tips.error('数据提交发生错误......');
         			}
         		}
@@ -1344,6 +1346,7 @@ var App = function () {
             			}
             		}
             	}else{
+//            		这里进行的错误提示suntao
             		App.Tips.error(json.msg);
             		if(json.resultType == 'function'){
             			if(errfn && errfn instanceof Function){

@@ -8,6 +8,7 @@ public class Constant {
 	public static final String IMG_SAVE_PATH = "IMG_SAVE_PATH"; // 图片存放地址路径
 	public static final String IMG_SAVE_URL = "D_IMG_HOST"; // 图片存放地址路径
 	public static final String PUBLISH_STATE = "PUBLISH_STATE"; // 发布状态
+	public static final String EXCEL_SAVE_PATH = "EXCEL_SAVE_PATH"; // 图片存放地址路径
 	
 	public static final String C_APPSTARTPAGE="C_APPSTARTPAGE";//APP启动页面配置
 	public static final String C_FLOW_FIRST_PAGE="C_FLOW_FIRST_PAGE";//流量商城首页列表
@@ -26,5 +27,7 @@ public class Constant {
 
 	/******** 系统管理菜单 *********/
 	public static final String MENU_DICTIONARY = "dictionary";
-
+	
+	/***********  批量动作定义  ***********/
+	public static final String BATCH_CARD_STOCKIN = "新卡入库";
 }

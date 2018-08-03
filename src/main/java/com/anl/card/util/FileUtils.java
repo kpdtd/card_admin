@@ -1,18 +1,21 @@
 package com.anl.card.util;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
+
 import sun.misc.BASE64Encoder;
 
 import javax.servlet.ServletOutputStream;
@@ -171,5 +174,43 @@ public class FileUtils {
 		LogFactory.getInstance().getLogger().debug("文件存储路径为：" + targetFile.getPath());
 		String imgUrl = "/" + url + "/" + saveFileName + "/" + saveName;
 		return imgUrl;
+	}
+	
+	public static String saveFile(MultipartFile file, String name, String savePath) throws Exception {
+		OutputStream os = null;
+		InputStream is = null;
+        try {
+        	if(file == null || StringUtils.isEmpty(name) || StringUtils.isEmpty(savePath)) {
+        		throw new IOException("存储文件参数错误：file=" + file +"| name = " + name + "| savePath = " + savePath);
+        	}
+            byte[] bs = new byte[1024];
+            // 读取到的数据长度
+            int len;
+            // 输出的文件流保存到本地文件
+            File tempFile = new File(savePath);
+            if (!tempFile.exists()) {
+                tempFile.mkdirs();
+            }
+            os = new FileOutputStream(savePath + File.separator + name);
+            is = file.getInputStream();
+            // 开始读取
+            while ((len = is.read(bs)) != -1) {
+                os.write(bs, 0, len);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // 完毕，关闭所有链接
+            try {
+                os.close();
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return name;
 	}
 }
