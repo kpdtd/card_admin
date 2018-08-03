@@ -85,10 +85,10 @@
 					<c:forEach var="rule" items="${ruleList}">
 						<c:choose>
 							<c:when test="${rule.id == cashCouponDefinition.dateRule }">
-								<label class="radio"><input type="radio" name="dateRule" id="dateRule1" checked value="${rule.id }" />${rule.name }</label>
+								<label class="radio"><input type="radio" name="dateRule" id="${rule.id }" checked value="${rule.id }" />${rule.name }</label>
 							</c:when>
 							<c:otherwise>
-								<label class="radio"><input type="radio" id="dateRule2"
+								<label class="radio"><input type="radio" id="${rule.id }"
 															name="dateRule" value="${rule.id }" />${rule.name }</label>
 							</c:otherwise>
 						</c:choose>
@@ -174,25 +174,21 @@
 		rules : {
 			"title" : {
 				required : true
-			},
-			 "deatil" : {
+			}, "deatil" : {
 				required : true
-			},
-			"number" : {
+			}, "number" : {
 				required: true,
 				digits:true
-			}, "couponType" : {
-				required : true
 			}, "faceValue" : {
 				required : true,
 				digits:true
 			}, "validDays" : {
-				required : "#dateRule1:checked",
+				required : "#1:checked",
 				digits:true
 			},"startDate" : {
-				required : "#dateRule2:checked"
+				required : "#2:checked"
 			},"endDate" : {
-				required : "#dateRule2:checked"
+				required : "#2:checked"
 			}
 		}
 	});
