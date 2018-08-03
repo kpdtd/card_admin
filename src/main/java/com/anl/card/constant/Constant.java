@@ -17,6 +17,8 @@ public class Constant {
 	// 数据字典配置常量信息
 	public static final String PROVIDER_TYPE = "PROVIDER_TYPE"; // 供应商类型
 
+	public static final String CASH_COUPON_RULE="CASH_COUPON_RULE";//优惠券规则定义
+
 	public static final String MENU_STRING = "menu";// 控制左侧菜单显示效果
 	
 	/******** 运营商管理 *********/
