@@ -12,13 +12,13 @@
 	<div class="portlet-body form row-fluid">
 		<form id="form_sample_1" action="#" class="form-horizontal dialog"  enctype="multipart/form-data"
 			onsubmit="return false;">
-			<input type="hidden" id="initID" name="id" value="$/{cardWrittenOff.id}"/>
+			<input type="hidden" id="initID" name="id" value="${cardWrittenOff.id}"/>
 			
 			<div class="control-group">
 				<label class="control-label" for="firstName"><span class="required">*</span>	id</label>
 				<div class="controls">
 					<input type="text" class="m-wrap span10" name="id" 
-						 value="$/{cardWrittenOff.id}">
+						 value="${cardWrittenOff.id}">
 				</div>
 			</div>
 			
@@ -26,7 +26,7 @@
 				<label class="control-label" for="firstName"><span class="required">*</span>	supplierId</label>
 				<div class="controls">
 					<input type="text" class="m-wrap span10" name="supplierId" 
-						 value="$/{cardWrittenOff.supplierId}">
+						 value="${cardWrittenOff.supplierId}">
 				</div>
 			</div>
 			
@@ -34,7 +34,7 @@
 				<label class="control-label" for="firstName"><span class="required">*</span>	cardOwnerId</label>
 				<div class="controls">
 					<input type="text" class="m-wrap span10" name="cardOwnerId" 
-						 value="$/{cardWrittenOff.cardOwnerId}">
+						 value="${cardWrittenOff.cardOwnerId}">
 				</div>
 			</div>
 			
@@ -42,7 +42,7 @@
 				<label class="control-label" for="firstName"><span class="required">*</span>	iccid</label>
 				<div class="controls">
 					<input type="text" class="m-wrap span10" name="iccid" 
-						 value="$/{cardWrittenOff.iccid}">
+						 value="${cardWrittenOff.iccid}">
 				</div>
 			</div>
 			
@@ -50,7 +50,7 @@
 				<label class="control-label" for="firstName"><span class="required">*</span>	msisdn</label>
 				<div class="controls">
 					<input type="text" class="m-wrap span10" name="msisdn" 
-						 value="$/{cardWrittenOff.msisdn}">
+						 value="${cardWrittenOff.msisdn}">
 				</div>
 			</div>
 			
@@ -58,7 +58,7 @@
 				<label class="control-label" for="firstName"><span class="required">*</span>	imsi</label>
 				<div class="controls">
 					<input type="text" class="m-wrap span10" name="imsi" 
-						 value="$/{cardWrittenOff.imsi}">
+						 value="${cardWrittenOff.imsi}">
 				</div>
 			</div>
 			
@@ -66,7 +66,7 @@
 				<label class="control-label" for="firstName"><span class="required">*</span>	bindDevice</label>
 				<div class="controls">
 					<input type="text" class="m-wrap span10" name="bindDevice" 
-						 value="$/{cardWrittenOff.bindDevice}">
+						 value="${cardWrittenOff.bindDevice}">
 				</div>
 			</div>
 			
@@ -74,7 +74,7 @@
 				<label class="control-label" for="firstName"><span class="required">*</span>	cardState</label>
 				<div class="controls">
 					<input type="text" class="m-wrap span10" name="cardState" 
-						 value="$/{cardWrittenOff.cardState}">
+						 value="${cardWrittenOff.cardState}">
 				</div>
 			</div>
 			
@@ -82,7 +82,7 @@
 				<label class="control-label" for="firstName"><span class="required">*</span>	gprsState</label>
 				<div class="controls">
 					<input type="text" class="m-wrap span10" name="gprsState" 
-						 value="$/{cardWrittenOff.gprsState}">
+						 value="${cardWrittenOff.gprsState}">
 				</div>
 			</div>
 			
@@ -90,7 +90,7 @@
 				<label class="control-label" for="firstName"><span class="required">*</span>	opState</label>
 				<div class="controls">
 					<input type="text" class="m-wrap span10" name="opState" 
-						 value="$/{cardWrittenOff.opState}">
+						 value="${cardWrittenOff.opState}">
 				</div>
 			</div>
 			
@@ -98,7 +98,7 @@
 				<label class="control-label" for="firstName"><span class="required">*</span>	poolId</label>
 				<div class="controls">
 					<input type="text" class="m-wrap span10" name="poolId" 
-						 value="$/{cardWrittenOff.poolId}">
+						 value="${cardWrittenOff.poolId}">
 				</div>
 			</div>
 			
@@ -106,7 +106,7 @@
 				<label class="control-label" for="firstName"><span class="required">*</span>	operator</label>
 				<div class="controls">
 					<input type="text" class="m-wrap span10" name="operator" 
-						 value="$/{cardWrittenOff.operator}">
+						 value="${cardWrittenOff.operator}">
 				</div>
 			</div>
 			
@@ -114,7 +114,7 @@
 				<label class="control-label" for="firstName"><span class="required">*</span>	apn</label>
 				<div class="controls">
 					<input type="text" class="m-wrap span10" name="apn" 
-						 value="$/{cardWrittenOff.apn}">
+						 value="${cardWrittenOff.apn}">
 				</div>
 			</div>
 			
@@ -122,7 +122,7 @@
 				<label class="control-label" for="firstName"><span class="required">*</span>	activationTime</label>
 				<div class="controls">
 					<input type="text" class="m-wrap span10" name="activationTime" 
-						 value="$/{cardWrittenOff.activationTime}">
+						 value="${cardWrittenOff.activationTime}">
 				</div>
 			</div>
 			
@@ -130,7 +130,7 @@
 				<label class="control-label" for="firstName"><span class="required">*</span>	createTime</label>
 				<div class="controls">
 					<input type="text" class="m-wrap span10" name="createTime" 
-						 value="$/{cardWrittenOff.createTime}">
+						 value="${cardWrittenOff.createTime}">
 				</div>
 			</div>
 			
@@ -138,7 +138,7 @@
 				<label class="control-label" for="firstName"><span class="required">*</span>	updateTime</label>
 				<div class="controls">
 					<input type="text" class="m-wrap span10" name="updateTime" 
-						 value="$/{cardWrittenOff.updateTime}">
+						 value="${cardWrittenOff.updateTime}">
 				</div>
 			</div>
 			
@@ -146,7 +146,7 @@
 				<label class="control-label" for="firstName"><span class="required">*</span>	writtenOffTime</label>
 				<div class="controls">
 					<input type="text" class="m-wrap span10" name="writtenOffTime" 
-						 value="$/{cardWrittenOff.writtenOffTime}">
+						 value="${cardWrittenOff.writtenOffTime}">
 				</div>
 			</div>
 			<div class="control-group">
