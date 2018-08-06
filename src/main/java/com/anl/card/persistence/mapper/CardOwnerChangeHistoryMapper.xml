@@ -9,8 +9,8 @@
         INSERT INTO t_card_owner_change_history (
         	id,
         	supplier_id,
-        	shipper_agency_id,
-        	agency_id,
+        	from_owner_id,
+        	to_owner_id,
         	stock_id,
         	batch_number,
         	card_id,
@@ -19,8 +19,8 @@
         ) VALUES (
         	#{id},
         	#{supplierId},
-        	#{shipperAgencyId},
-        	#{agencyId},
+        	#{fromOwnerId},
+        	#{toOwnerId},
         	#{stockId},
         	#{batchNumber},
         	#{cardId},
@@ -36,11 +36,11 @@
 	        <if test="supplierId != null">
 	        	supplier_id = #{supplierId},
 	        </if>
-	        <if test="shipperAgencyId != null">
-	        	shipper_agency_id = #{shipperAgencyId},
+	        <if test="fromOwnerId != null">
+	        	from_owner_id = #{fromOwnerId},
 	        </if>
-	        <if test="agencyId != null">
-	        	agency_id = #{agencyId},
+	        <if test="toOwnerId != null">
+	        	to_owner_id = #{toOwnerId},
 	        </if>
 	        <if test="stockId != null">
 	        	stock_id = #{stockId},
@@ -85,11 +85,11 @@
 			<if test="supplierId != null">
 				AND supplier_id = #{supplierId}
 			</if>
-			<if test="shipperAgencyId != null">
-				AND shipper_agency_id = #{shipperAgencyId}
+			<if test="fromOwnerId != null">
+				AND from_owner_id = #{fromOwnerId}
 			</if>
-			<if test="agencyId != null">
-				AND agency_id = #{agencyId}
+			<if test="toOwnerId != null">
+				AND to_owner_id = #{toOwnerId}
 			</if>
 			<if test="stockId != null">
 				AND stock_id = #{stockId}
@@ -124,11 +124,11 @@
 			<if test="supplierId != null">
 				AND supplier_id = #{supplierId}
 			</if>
-			<if test="shipperAgencyId != null">
-				AND shipper_agency_id = #{shipperAgencyId}
+			<if test="fromOwnerId != null">
+				AND from_owner_id = #{fromOwnerId}
 			</if>
-			<if test="agencyId != null">
-				AND agency_id = #{agencyId}
+			<if test="toOwnerId != null">
+				AND to_owner_id = #{toOwnerId}
 			</if>
 			<if test="stockId != null">
 				AND stock_id = #{stockId}

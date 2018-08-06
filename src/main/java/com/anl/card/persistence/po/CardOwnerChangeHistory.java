@@ -5,8 +5,8 @@ import java.util.*;
 public class CardOwnerChangeHistory {
 	private Integer id;
 	private Integer supplierId;
-	private Integer shipperAgencyId;
-	private Integer agencyId;
+	private Integer fromOwnerId;
+	private Integer toOwnerId;
 	private Integer stockId;
 	private String batchNumber;
 	private Integer cardId;
@@ -27,20 +27,9 @@ public class CardOwnerChangeHistory {
 	public Integer getSupplierId() {
 		return this.supplierId;
 	}
-	public void setShipperAgencyId(Integer value) {
-		this.shipperAgencyId = value;
-	}
+
 	
-	public Integer getShipperAgencyId() {
-		return this.shipperAgencyId;
-	}
-	public void setAgencyId(Integer value) {
-		this.agencyId = value;
-	}
 	
-	public Integer getAgencyId() {
-		return this.agencyId;
-	}
 	public void setStockId(Integer value) {
 		this.stockId = value;
 	}
@@ -75,6 +64,22 @@ public class CardOwnerChangeHistory {
 	
 	public Date getCreateTime() {
 		return this.createTime;
+	}
+
+	public Integer getFromOwnerId() {
+		return fromOwnerId;
+	}
+
+	public void setFromOwnerId(Integer fromOwnerId) {
+		this.fromOwnerId = fromOwnerId;
+	}
+
+	public Integer getToOwnerId() {
+		return toOwnerId;
+	}
+
+	public void setToOwnerId(Integer toOwnerId) {
+		this.toOwnerId = toOwnerId;
 	}
 }
 
