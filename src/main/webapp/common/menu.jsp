@@ -76,11 +76,36 @@
 				<i class=" icon-list-ul"></i> <span class="title">运营商管理</span> <span class="arrow"></span>
 			</a>
 			<ul class="sub-menu" style="display: none;">
-				<li id="agency">
+				<li id="supplier">
 					<a href="<%=request.getContextPath()%>/supplier/getPage">运营商基本信息</a>
 				</li>
-				<li id="goodsLibrary">
-					<a href="">运营商套餐/流量池</a>
+				<li id="supplierPool">
+					<a href="<%=request.getContextPath()%>/supplierPool/getPage">运营商套餐/流量池</a>
+				</li>
+			</ul>
+		</li>
+		<li class="">
+			<a href="javascript:;">
+				<i class=" icon-list-ul"></i> <span class="title">用户管理</span> <span class="arrow"></span>
+			</a>
+			<ul class="sub-menu" style="display: none;">
+				<li id="user">
+					<a href="<%=request.getContextPath()%>/user/getPage">用户基本信息</a>
+				</li>
+				<li id="userAccount">
+					<a href="<%=request.getContextPath()%>/userAccount/getPage">用户账户信息</a>
+				</li>
+				<li id="userChargeRecord">
+					<a href="<%=request.getContextPath()%>/userChargeRecord/getPage">用户支付订单信息</a>
+				</li>
+				<li id="activityCardInfo">
+					<a href="<%=request.getContextPath()%>/activityCardInfo/getPage">用户卡订单信息</a>
+				</li>
+				<li id="chargeList">
+					<a href="<%=request.getContextPath()%>/chargeList/getPage">充值列表信息</a>
+				</li>
+				<li id="planDefinition">
+					<a href="<%=request.getContextPath()%>/planDefinition/getPage">套餐列表信息</a>
 				</li>
 			</ul>
 		</li>
@@ -89,8 +114,8 @@
 				<i class=" icon-list-ul"></i> <span class="title">卡归属方管理</span> <span class="arrow"></span>
 			</a>
 			<ul class="sub-menu">
-				<li>
-					<a class="" href="#"> 归属方信息 </a>
+				<li id="cardOwner">
+					<a class="" href="<%=request.getContextPath()%>/cardOwner/getPage"> 归属方信息 </a>
 				</li>
 			</ul>
 		</li>
@@ -103,10 +128,16 @@
 					<a class="" href="<%=request.getContextPath()%>/card/getPage"> 库存管理</a>
 				</li>
 				<li>
-					<a class="" href="#"> 注销卡管理</a>
+					<a class="" href="<%=request.getContextPath()%>/cardWrittenOff/getPage"> 注销卡管理</a>
 				</li>
 				<li>
 					<a class="" href="<%=request.getContextPath()%>/cardBatchProcess/getPage"> 卡批量管理</a>
+				</li>
+				<li>
+					<a class="" href="<%=request.getContextPath()%>/channel/getPage"> 卡渠道管理</a>
+				</li>
+				<li>
+					<a class="" href="<%=request.getContextPath()%>/cashCouponDefinition/getPage">优惠券管理</a>
 				</li>
 			</ul>
 		</li>
@@ -119,7 +150,7 @@
 					<a class="" href="<%=request.getContextPath()%>/column/page"> 频道管理</a>
 				</li>
 				<li id="dictionary">
-					<a href="<%=request.getContextPath()%>/dictionary/getPage""> 数据字典管理</a>
+					<a href="<%=request.getContextPath()%>/dictionary/getPage"> 数据字典管理</a>
 				</li>
 			</ul>
 		</li>
