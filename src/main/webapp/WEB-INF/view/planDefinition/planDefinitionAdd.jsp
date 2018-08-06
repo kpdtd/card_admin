@@ -120,6 +120,14 @@
 	<button type="button" data-dismiss="modal" class="btn">关闭</button>
 </div>
 <script>
+	jQuery(document).ready(function() {
+		if($('input[type=radio][name=effectiveTime]:checked').val()==null){
+			$('input[type=radio][name=effectiveTime]:last').attr('checked', 'checked');
+		}
+		if($('input[type=radio][name=state]:checked').val()==null){
+			$('input[type=radio][name=state]:first').attr('checked', 'checked');
+		}
+	});
 	$("#submit_btn").click(function(){
 		var id = $("#initID").val();
 		if(id != "" && id != null){

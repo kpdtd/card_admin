@@ -54,6 +54,7 @@
 	<button type="button" data-dismiss="modal" class="btn">关闭</button>
 </div>
 <script>
+
 	$("#submit_btn").click(function(){
 		var id = $("#initID").val();
 		if(id != "" && id != null){
