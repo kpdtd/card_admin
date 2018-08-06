@@ -68,12 +68,12 @@
 							<div class="row-fluid">
 								<div class="alert alert-block alert-info fade in">
 									<%-- <shiro:hasPermission name="/dictionary/add">   --%>
-									<button class="btn black" id='batchStockIn'>
+									<button class="btn black" id='batchStockIn'  onclick="batchStockIn()">
 										<i class="icon-plus"></i> 批量入库
 									</button>
 									&nbsp&nbsp&nbsp&nbsp
-									<button class="btn black">
-										<i class="icon-plus"></i> 批量发卡
+									<button class="btn black"  id='batchCardOwner'  onclick="batchCardOwner()">
+										<i class="icon-plus"></i> 批量变更归属
 									</button>
 									&nbsp&nbsp&nbsp&nbsp
 									<button class="btn black">
@@ -129,12 +129,26 @@
 			TableAdvanced.init();
 			initPage();
 			FormComponents.init();
-			$('#batchStockIn').click(function() {
+/* 			$('#batchStockIn').click(function() {
 				App.Modal.load('./getCardStockInPage', {}, {
 					'title' : '批量登记'
 				});
-			});
+			}); */
 		});
+
+		function batchStockIn() {
+			App.Modal.load("./getCardStockInPage", {
+			}, {
+				"title" : "批量登记"
+			});
+		}
+
+		function batchCardOwner() {
+			App.Modal.load("./getBatchChangeCardOwnerPage", {
+			}, {
+				"title" : "批量变更卡归属人"
+			});
+		}
 
 		function edit(id) {
 			App.Modal.load("./getCardStockInPage", {
