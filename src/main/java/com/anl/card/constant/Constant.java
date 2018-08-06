@@ -30,4 +30,5 @@ public class Constant {
 	
 	/***********  批量动作定义  ***********/
 	public static final String BATCH_CARD_STOCKIN = "新卡入库";
+	public static final String BATCH_CARD_OWNER_CHANGE = "卡归属方变更";
 }
