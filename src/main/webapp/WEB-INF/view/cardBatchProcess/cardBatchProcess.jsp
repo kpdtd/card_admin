@@ -13,22 +13,12 @@
 <%@include file="/common/js.jsp"%>
 <!-- BEGIN HEAD -->
 <head>
-<style type="text/css">
-/* 
-	https://www.cnblogs.com/hdwang/p/7146434.html
-	datatabe横向滚动条，不好用
-	#tableArea .dataTables_wrapper {
-    position: relative;
-    clear: both;
-    zoom: 1;
-    overflow-x: auto;
-}
-
-#tableArea table{
-    width: 800px;
-} */
-
-</style>
+	<style type="text/css">
+	.table th, .table td {
+		text-align:center;
+		vertical-align: middle !important;
+	}
+	</style>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -68,19 +58,19 @@
 							<div class="row-fluid">
 								<div class="alert alert-block alert-info fade in">
 									<%-- <shiro:hasPermission name="/dictionary/add">   --%>
-									<button class="btn black" id='batchStockIn'  onclick="batchStockIn()">
+									<button class="btn black" id='batchStockIn' onclick="batchStockIn()">
 										<i class="icon-plus"></i> 批量入库
 									</button>
 									&nbsp&nbsp&nbsp&nbsp
-									<button class="btn black"  id='batchCardOwner'  onclick="batchCardOwner()">
+									<button class="btn black" id='batchCardOwner' onclick="batchCardOwner()">
 										<i class="icon-plus"></i> 批量变更归属
 									</button>
 									&nbsp&nbsp&nbsp&nbsp
-									<button class="btn black">
+									<button class="btn black" id='batchPoolChange' onclick="batchPoolChange()">
 										<i class="icon-plus"></i> 批量变更套餐
 									</button>
 									&nbsp&nbsp&nbsp&nbsp
-									<button class="btn black">
+									<button class="btn black" id='batchCardWrittenOff' onclick="batchCardWrittenOff()">
 										<i class="icon-plus"></i> 批量销号
 									</button>
 									<!-- <a href="#" class="btn blue"><i class="icon-plus"></i> 批量状态变更</a> -->
@@ -96,7 +86,7 @@
 							<div class="portlet-body">
 								<div id="sample_2_wrapper" class="dataTables_wrapper form-inline" role="grid">
 									<div class="row-fluid">
-										<table style="table-layout: fixed;white-space: nowrap;"
+										<table style="table-layout: fixed; white-space: nowrap;"
 											class="table table-striped table-bordered table-hover table-full-width dataTable" id="portlet_Tables"
 											aria-describedby="sample_2_info">
 											<thead>
@@ -129,46 +119,56 @@
 			TableAdvanced.init();
 			initPage();
 			FormComponents.init();
-/* 			$('#batchStockIn').click(function() {
-				App.Modal.load('./getCardStockInPage', {}, {
-					'title' : '批量登记'
-				});
-			}); */
+			/* 			$('#batchStockIn').click(function() {
+			 App.Modal.load('./getCardStockInPage', {}, {
+			 'title' : '批量登记'
+			 });
+			 }); */
 		});
 
 		function batchStockIn() {
-			App.Modal.load("./getCardStockInPage", {
-			}, {
+			App.Modal.load("./getCardStockInPage", {}, {
 				"title" : "批量登记"
 			});
 		}
 
 		function batchCardOwner() {
-			App.Modal.load("./getBatchChangeCardOwnerPage", {
-			}, {
+			App.Modal.load("./getBatchChangeCardOwnerPage", {}, {
 				"title" : "批量变更卡归属人"
 			});
 		}
 
-		function edit(id) {
+		function batchPoolChange() {
+			App.Modal.load("./getCardBatchPoolChangePage", {}, {
+				"title" : "批量变更卡套餐/流量池"
+			});
+		}
+
+		function batchCardWrittenOff() {
+			App.Modal.load("./getBatchCardWrittenOffPage", {}, {
+				"title" : "批量销号"
+			});
+		}
+
+/* 		function edit(id) {
 			App.Modal.load("./getCardStockInPage", {
 				'id' : id
 			}, {
 				"title" : "批量登记"
 			});
-		}
+		} */
 
-		function downloads(id) {
+/* 		function downloads(id) {
 			var url = "./download?id=" + id;
 			location.href = url;
-		}
+		} */
 
 		function initPage() {
 			var oTable = $('#portlet_Tables')
 					.dataTable(
 							{
 								"bLengthChange" : false, //改变每页显示数据数量 可选的每页展示的数据数量，默认为10条
-								"scrollX": true,
+								"scrollX" : true,
 								"iDisplayLength" : 50, // 默认煤业显示条数
 								"bDestroy" : true,
 								"bServerSide" : true, // 使用服务器端处理
@@ -182,7 +182,7 @@
 								"sAjaxSource" : "getList",
 								"aoColumns" : [
 										{
-											"sWidth": "100px",
+											"sWidth" : "100px",
 											"sClass" : "center",
 											"mDataProp" : "code",
 											"mRender" : function(obj) {
@@ -194,7 +194,7 @@
 											}
 										},
 										{
-											"sWidth": "60px",
+											"sWidth" : "60px",
 											"sClass" : "center",
 											"mDataProp" : "action",
 											"mRender" : function(obj) {
@@ -206,7 +206,7 @@
 											}
 										},
 										{
-											"sWidth": "30px",
+											"sWidth" : "30px",
 											"sClass" : "center",
 											"mDataProp" : "number",
 											"mRender" : function(obj) {
@@ -243,19 +243,19 @@
 												}
 											}
 										},
-/* 										{
-											"sClass" : "center",
-											"mDataProp" : "comment",
-											"mRender" : function(obj) {
-												if (obj == null) {
-													return "";
-												} else {
-													return obj;
-												}
-											}
-										}, */
+										/* 										{
+										 "sClass" : "center",
+										 "mDataProp" : "comment",
+										 "mRender" : function(obj) {
+										 if (obj == null) {
+										 return "";
+										 } else {
+										 return obj;
+										 }
+										 }
+										 }, */
 										{
-											"sWidth": "110px",
+											"sWidth" : "110px",
 											"sClass" : "center",
 											"mDataProp" : "startTime",
 											"mRender" : function(obj) {
@@ -267,7 +267,7 @@
 											}
 										},
 										{
-											"sWidth": "110px",
+											"sWidth" : "110px",
 											"sClass" : "center",
 											"mDataProp" : "endTime",
 											"mRender" : function(obj) {
@@ -285,7 +285,8 @@
 													sData, oData, iRow, iCol) {
 												var html = "";
 	<%--  <shiro:hasPermission name="/dictionary/editDictionary">  --%>
-		html += '<a href="./download?id=' + oData.id +'">下载</a>';
+		html += '<a href="./download?id='
+														+ oData.id + '">下载</a>';
 	<%--  </shiro:hasPermission>  --%>
 		return $(nTd).html(html);
 											}

@@ -1,9 +1,14 @@
 package com.anl.card.vo;
 
+import com.anl.card.persistence.po.Card;
 import com.anl.card.persistence.po.CardWrittenOff;
 import com.anl.card.persistence.po.SupplierPool;
 
 public class CardWrittenOffExt extends CardWrittenOff{
+
+	public CardWrittenOffExt(Card card) {
+	    super(card);
+    }
 
 	private String ownerCompany;
 	private String supplierName;

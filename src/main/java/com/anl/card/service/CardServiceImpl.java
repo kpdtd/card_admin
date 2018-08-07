@@ -4,13 +4,13 @@ package com.anl.card.service;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.anl.card.persistence.mapper.CardMapper;
 import com.anl.card.persistence.po.Card;
+import com.anl.card.vo.CardExt;
 
 @Service
 public class CardServiceImpl implements CardService {
@@ -52,6 +52,11 @@ public class CardServiceImpl implements CardService {
 	public int count(Map<String, Object> condition) throws SQLException {
 		return cardMapper.count(condition);
 	}
+
+	@Override
+    public List<CardExt> getListByCondition(Map<String, Object> model) {
+		return cardMapper.getListByCondition(model);
+    }
 	
 }
 

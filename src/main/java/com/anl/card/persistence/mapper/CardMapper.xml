@@ -3,7 +3,7 @@
 
 
 <mapper namespace="com.anl.card.persistence.mapper.CardMapper">
-    
+
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
     <![CDATA[
         INSERT INTO t_card (
@@ -45,70 +45,70 @@
 	</insert>
 
 	<update id="update" parameterType="com.anl.card.persistence.po.Card">
-        UPDATE t_card 
+		UPDATE t_card
 		<set>
-	        <if test="supplierId != null">
-	        	supplier_id = #{supplierId},
-	        </if>
-	        <if test="cardOwnerId != null">
-	        	card_owner_id = #{cardOwnerId},
-	        </if>
-	        <if test="iccid != null">
-	        	iccid = #{iccid},
-	        </if>
-	        <if test="msisdn != null">
-	        	msisdn = #{msisdn},
-	        </if>
-	        <if test="imsi != null">
-	        	imsi = #{imsi},
-	        </if>
-	        <if test="bindDevice != null">
-	        	bind_device = #{bindDevice},
-	        </if>
-	        <if test="cardState != null">
-	        	card_state = #{cardState},
-	        </if>
-	        <if test="gprsState != null">
-	        	gprs_state = #{gprsState},
-	        </if>
-	        <if test="opState != null">
-	        	op_state = #{opState},
-	        </if>
-	        <if test="poolId != null">
-	        	pool_id = #{poolId},
-	        </if>
-	        <if test="operator != null">
-	        	operator = #{operator},
-	        </if>
-	        <if test="apn != null">
-	        	apn = #{apn},
-	        </if>
-	        <if test="activationTime != null">
-	        	activation_time = #{activationTime},
-	        </if>
-	        <if test="createTime != null">
-	        	create_time = #{createTime},
-	        </if>
-	        <if test="updateTime != null">
-	        	update_time = #{updateTime}
-	        </if>
-	    </set>
-        WHERE
-	        id = #{id}
+			<if test="supplierId != null">
+				supplier_id = #{supplierId},
+			</if>
+			<if test="cardOwnerId != null">
+				card_owner_id = #{cardOwnerId},
+			</if>
+			<if test="iccid != null">
+				iccid = #{iccid},
+			</if>
+			<if test="msisdn != null">
+				msisdn = #{msisdn},
+			</if>
+			<if test="imsi != null">
+				imsi = #{imsi},
+			</if>
+			<if test="bindDevice != null">
+				bind_device = #{bindDevice},
+			</if>
+			<if test="cardState != null">
+				card_state = #{cardState},
+			</if>
+			<if test="gprsState != null">
+				gprs_state = #{gprsState},
+			</if>
+			<if test="opState != null">
+				op_state = #{opState},
+			</if>
+			<if test="poolId != null">
+				pool_id = #{poolId},
+			</if>
+			<if test="operator != null">
+				operator = #{operator},
+			</if>
+			<if test="apn != null">
+				apn = #{apn},
+			</if>
+			<if test="activationTime != null">
+				activation_time = #{activationTime},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime}
+			</if>
+		</set>
+		WHERE
+		id = #{id}
 	</update>
 
 	<delete id="deleteById">
-        DELETE FROM t_card WHERE
-        id = #{id}
+		DELETE FROM t_card WHERE
+		id = #{id}
 	</delete>
 
 	<select id="getById" resultType="com.anl.card.persistence.po.Card">
 		SELECT
-			*
+		*
 		FROM
-			t_card 
-	    WHERE
-	        id = #{id} 
+		t_card
+		WHERE
+		id = #{id}
 	</select>
 
 	<!-- 查询条件where,如果有时间范围查询，参数必须是startTime 和 endTime -->
@@ -150,28 +150,22 @@
 			<if test="operator != null">
 				AND operator = #{operator}
 			</if>
-			<if test="apn != null">
-				AND apn = #{apn}
-			</if>
-			<if test="activationTime != null">
+<!-- 			<if test="activationTime != null">
 				AND activation_time = #{activationTime}
-			</if>
+			</if> -->
 			<if test="startTime != null">
 	       	<![CDATA[
-				AND create_time >= #{startTime} 
+				AND activation_time >= #{startTime} 
 			]]>
 			</if>
 			<if test="endTime != null">
 			<![CDATA[
-				AND create_time < #{endTime}
+				AND activation_time < #{endTime}
 			]]>
-			</if>
-			<if test="updateTime != null">
-				AND update_time = #{updateTime}
 			</if>
 		</where>
 	</sql>
-	
+
 	<sql id="whereForPo">
 		<where>
 			<if test="id != null">
@@ -214,30 +208,113 @@
 				AND apn = #{apn}
 			</if>
 		</where>
-	</sql>	
+	</sql>
 
 	<select id="count" parameterType="java.util.Map" resultType="int">
-		SELECT count(*) FROM t_card
-		<include refid="where" />
+		SELECT
+		count(a.id)
+		FROM
+		t_card a, t_card_owner b ,t_supplier c
+		WHERE
+		a.card_owner_id=b.id
+		and a.supplier_id=c.id
+		<if test="iccid != null">
+			AND a.iccid=#{iccid}
+		</if>
+		<if test="imsi != null">
+			AND a.imsi=#{imsi}
+		</if>
+		<if test="msisdn != null">
+			AND a.msisdn=#{msisdn}
+		</if>
+		<if test="supplierId != null">
+			AND a.supplier_id=#{supplierId}
+		</if>
+		<if test="cardOwnerId != null">
+			AND a.card_owner_id=#{cardOwnerId}
+		</if>
+		<if test="cardState != null">
+			AND a.card_state=#{cardState}
+		</if>
+		<if test="startTime != null">
+	       	<![CDATA[
+				AND activation_time >= #{startTime} 
+			]]>
+		</if>
+		<if test="endTime != null">
+			<![CDATA[
+				AND activation_time < #{endTime}
+			]]>
+		</if>
+		ORDER BY a.id DESC
+		<if test="startPage != null">
+			limit #{startPage},#{pageSize}
+		</if>
 	</select>
 
-	<select id="getListByMap" parameterType="java.util.Map" resultType="com.anl.card.persistence.po.Card">
-		SELECT 
-			*
+	<select id="getListByMap" parameterType="java.util.Map"
+		resultType="com.anl.card.persistence.po.Card">
+		SELECT
+		*
 		FROM
-			t_card 
-	    <include refid="where" />
+		t_card
+		<include refid="where" />
 		<if test="startPage!= null">
-			limit #{startPage}, #{pageSize} 
-		</if>	
+			limit #{startPage}, #{pageSize}
+		</if>
 	</select>
-	
-	<select id="getListByPo" parameterType="com.anl.card.persistence.po.Card" resultType="com.anl.card.persistence.po.Card">
-		SELECT 
-			*
-		FROM 
-			t_card 
-	    <include refid="whereForPo" />
+
+	<select id="getListByPo" parameterType="com.anl.card.persistence.po.Card"
+		resultType="com.anl.card.persistence.po.Card">
+		SELECT
+		*
+		FROM
+		t_card
+		<include refid="whereForPo" />
+	</select>
+
+	<select id="getListByCondition" parameterType="java.util.Map"
+		resultType="com.anl.card.vo.CardExt">
+		SELECT
+		*,b.company as cardOwnerName,c.company as supplierName, d.pool_name as poolName
+		FROM
+		t_card a, t_card_owner b ,t_supplier c, t_supplier_pool d
+		WHERE
+		a.card_owner_id=b.id
+		and a.supplier_id=c.id
+		and a.pool_id = d.id
+		<if test="iccid != null">
+			AND a.iccid=#{iccid}
+		</if>
+		<if test="imsi != null">
+			AND a.imsi=#{imsi}
+		</if>
+		<if test="msisdn != null">
+			AND a.msisdn=#{msisdn}
+		</if>
+		<if test="supplierId != null">
+			AND a.supplier_id=#{supplierId}
+		</if>
+		<if test="cardOwnerId != null">
+			AND a.card_owner_id=#{cardOwnerId}
+		</if>
+		<if test="cardState != null">
+			AND a.card_state=#{cardState}
+		</if>
+		<if test="startTime != null">
+	       	<![CDATA[
+				AND activation_time >= #{startTime} 
+			]]>
+		</if>
+		<if test="endTime != null">
+			<![CDATA[
+				AND activation_time < #{endTime}
+			]]>
+		</if>
+		ORDER BY a.id DESC
+		<if test="startPage != null">
+			limit #{startPage},#{pageSize}
+		</if>
 	</select>
 </mapper>
 

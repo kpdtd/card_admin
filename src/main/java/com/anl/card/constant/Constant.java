@@ -20,15 +20,15 @@ public class Constant {
 
 	public static final String CASH_COUPON_RULE="CASH_COUPON_RULE";//优惠券规则定义
 
+	 /*********菜单定义管理*************/
 	public static final String MENU_STRING = "menu";// 控制左侧菜单显示效果
-	
-	/******** 运营商管理 *********/
+	public static final String MENU_CARD = "card";// 控制左侧菜单显示效果
 	public static final String MENU_SUPPLIER = "supplier";
-
-	/******** 系统管理菜单 *********/
 	public static final String MENU_DICTIONARY = "dictionary";
 	
 	/***********  批量动作定义  ***********/
 	public static final String BATCH_CARD_STOCKIN = "新卡入库";
 	public static final String BATCH_CARD_OWNER_CHANGE = "卡归属方变更";
+	public static final String BATCH_CARD_POOL_CHANGE = "流量池变更";
+	public static final String BATCH_CARD_WRITTEN_OFF = "卡销号";
 }
