@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.anl.card.persistence.mapper.SupplierInterfaceItemMapper">
+    
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+    <![CDATA[
+        INSERT INTO t_supplier_interface_item (
+        	id,
+        	supplier_id,
+        	ec_code,
+        	interface_id,
+        	interface_tag,
+        	class_name,
+        	url,
+        	create_time
+        ) VALUES (
+        	#{id},
+        	#{supplierId},
+        	#{ecCode},
+        	#{interfaceId},
+        	#{interfaceTag},
+        	#{className},
+        	#{url},
+        	#{createTime}
+        )
+    ]]>
+	</insert>
+
+	<update id="update" parameterType="com.anl.card.persistence.po.SupplierInterfaceItem">
+        UPDATE t_supplier_interface_item 
+		<set>
+	        <if test="supplierId != null">
+	        	supplier_id = #{supplierId},
+	        </if>
+	        <if test="ecCode != null">
+	        	ec_code = #{ecCode},
+	        </if>
+	        <if test="interfaceId != null">
+	        	interface_id = #{interfaceId},
+	        </if>
+	        <if test="interfaceTag != null">
+	        	interface_tag = #{interfaceTag},
+	        </if>
+	        <if test="className != null">
+	        	class_name = #{className},
+	        </if>
+	        <if test="url != null">
+	        	url = #{url},
+	        </if>
+	        <if test="createTime != null">
+	        	create_time = #{createTime}
+	        </if>
+	    </set>
+        WHERE
+	        id = #{id}
+	</update>
+
+	<delete id="deleteById">
+        DELETE FROM t_supplier_interface_item WHERE
+        id = #{id}
+	</delete>
+
+	<select id="getById" resultType="com.anl.card.persistence.po.SupplierInterfaceItem">
+		SELECT
+			*
+		FROM
+			t_supplier_interface_item 
+	    WHERE
+	        id = #{id} 
+	</select>
+
+	<!-- 查询条件where,如果有时间范围查询，参数必须是startTime 和 endTime -->
+	<sql id="where">
+		<where>
+			<if test="id != null">
+				AND id = #{id}
+			</if>
+			<if test="supplierId != null">
+				AND supplier_id = #{supplierId}
+			</if>
+			<if test="ecCode != null">
+				AND ec_code = #{ecCode}
+			</if>
+			<if test="interfaceId != null">
+				AND interface_id = #{interfaceId}
+			</if>
+			<if test="interfaceTag != null">
+				AND interface_tag = #{interfaceTag}
+			</if>
+			<if test="className != null">
+				AND class_name = #{className}
+			</if>
+			<if test="url != null">
+				AND url = #{url}
+			</if>
+			<if test="startTime != null">
+	       	<![CDATA[
+				AND create_time >= #{startTime} 
+			]]>
+			</if>
+			<if test="endTime != null">
+			<![CDATA[
+				AND create_time < #{endTime}
+			]]>
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="whereForPo">
+		<where>
+			<if test="id != null">
+				AND id = #{id}
+			</if>
+			<if test="supplierId != null">
+				AND supplier_id = #{supplierId}
+			</if>
+			<if test="ecCode != null">
+				AND ec_code = #{ecCode}
+			</if>
+			<if test="interfaceId != null">
+				AND interface_id = #{interfaceId}
+			</if>
+			<if test="interfaceTag != null">
+				AND interface_tag = #{interfaceTag}
+			</if>
+			<if test="className != null">
+				AND class_name = #{className}
+			</if>
+			<if test="url != null">
+				AND url = #{url}
+			</if>
+		</where>
+	</sql>	
+
+	<select id="count" parameterType="java.util.Map" resultType="int">
+		SELECT count(*) FROM t_supplier_interface_item
+		<include refid="where" />
+	</select>
+
+	<select id="getListByMap" parameterType="java.util.Map" resultType="com.anl.card.persistence.po.SupplierInterfaceItem">
+		SELECT 
+			*
+		FROM
+			t_supplier_interface_item 
+	    <include refid="where" />
+		<if test="startPage!= null">
+			limit #{startPage}, #{pageSize} 
+		</if>	
+	</select>
+	
+	<select id="getListByPo" parameterType="com.anl.card.persistence.po.SupplierInterfaceItem" resultType="com.anl.card.persistence.po.SupplierInterfaceItem">
+		SELECT 
+			*
+		FROM 
+			t_supplier_interface_item 
+	    <include refid="whereForPo" />
+	</select>
+	<select id="getListByCondition" parameterType="java.util.Map" resultType="com.anl.card.vo.SupplierInterfaceItemExt">
+		SELECT
+		a.*,b.name as interfaceName,c.company as supplierName
+		FROM
+		t_supplier_interface_item a ,t_interface_list b,t_supplier c
+		 where a.interface_id=b.id and a.supplier_id=c.id
+		<if test="supplierId != null">
+			AND a.supplier_id = #{supplierId}
+		</if>
+		ORDER BY a.create_time DESC
+		<if test="startPage!= null">
+			limit #{startPage}, #{pageSize}
+		</if>
+	</select>
+</mapper>
+

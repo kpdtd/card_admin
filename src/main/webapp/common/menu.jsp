@@ -107,6 +107,12 @@
 				<li id="planDefinition">
 					<a href="<%=request.getContextPath()%>/planDefinition/getPage">套餐列表信息</a>
 				</li>
+				<li id="flowPacketDefinition">
+					<a href="<%=request.getContextPath()%>/flowPacketDefinition/getPage">流量包信息</a>
+				</li>
+				<li id="goodsActivity">
+					<a href="<%=request.getContextPath()%>/goodsActivity/getPage">活动列表信息</a>
+				</li>
 			</ul>
 		</li>
 		<li class="">
