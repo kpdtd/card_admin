@@ -3,6 +3,9 @@ package com.anl.card.persistence.po;
 import java.util.*;
 
 public class CardWrittenOff {
+	public CardWrittenOff(){
+		
+	}
 
 	public CardWrittenOff(Card card) {
 		this.id = card.getId();

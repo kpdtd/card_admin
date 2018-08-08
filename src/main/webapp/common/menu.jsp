@@ -73,7 +73,7 @@
 		</li>
 		<li class="">
 			<a href="javascript:;">
-				<i class=" icon-list-ul"></i> <span class="title">运营商管理</span> <span class="arrow"></span>
+				<i class=" icon-list-ul"></i> <span class="title">合作方管理</span> <span class="arrow"></span>
 			</a>
 			<ul class="sub-menu" style="display: none;">
 				<li id="supplier">
@@ -81,6 +81,12 @@
 				</li>
 				<li id="supplierPool">
 					<a href="<%=request.getContextPath()%>/supplierPool/getPage">运营商套餐/流量池</a>
+				</li>
+				<li id="cardOwner">
+					<a class="" href="<%=request.getContextPath()%>/cardOwner/getPage"> 归属方管理 </a>
+				</li>
+				<li id="channel">
+					<a class="" href="<%=request.getContextPath()%>/channel/getPage">推广渠道管理</a>
 				</li>
 			</ul>
 		</li>
@@ -115,32 +121,20 @@
 				</li>
 			</ul>
 		</li>
-		<li class="">
-			<a href="javascript:;">
-				<i class=" icon-list-ul"></i> <span class="title">卡归属方管理</span> <span class="arrow"></span>
-			</a>
-			<ul class="sub-menu">
-				<li id="cardOwner">
-					<a class="" href="<%=request.getContextPath()%>/cardOwner/getPage"> 归属方信息 </a>
-				</li>
-			</ul>
-		</li>
+
 		<li class="">
 			<a href="javascript:;">
 				<i class=" icon-list-ul"></i> <span class="title">卡信息管理</span> <span class="arrow"></span>
 			</a>
 			<ul class="sub-menu">
-				<li>
-					<a class="" href="<%=request.getContextPath()%>/card/getPage"> 库存管理</a>
+				<li id="cardStock">
+					<a class="" href="<%=request.getContextPath()%>/card/getPage"> 卡库存管理</a>
 				</li>
-				<li>
-					<a class="" href="<%=request.getContextPath()%>/cardWrittenOff/getPage"> 注销卡管理</a>
+				<li id="cardWrittenOff">
+					<a class="" href="<%=request.getContextPath()%>/cardWrittenOff/getPage"> 卡注销管理</a>
 				</li>
-				<li>
+				<li id="cardBatchProcess">
 					<a class="" href="<%=request.getContextPath()%>/cardBatchProcess/getPage"> 卡批量管理</a>
-				</li>
-				<li>
-					<a class="" href="<%=request.getContextPath()%>/channel/getPage"> 卡渠道管理</a>
 				</li>
 				<li>
 					<a class="" href="<%=request.getContextPath()%>/cashCouponDefinition/getPage">优惠券管理</a>

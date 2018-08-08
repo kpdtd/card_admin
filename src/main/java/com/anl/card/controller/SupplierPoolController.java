@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.anl.card.constant.Constant;
 import com.anl.card.persistence.po.Supplier;
 import com.anl.card.persistence.po.SupplierPool;
 import com.anl.card.service.CardService;
@@ -40,8 +41,8 @@ public class SupplierPoolController extends BaseController {
     @Autowired
     CardService cardService;
     @RequestMapping("getPage")
-    public String getPage() throws Exception {
-
+    public String getPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    	request.setAttribute("menu", Constant.MENU_SUPPLIER_POOL);
         return "supplierPool/supplierPool";
     }
 

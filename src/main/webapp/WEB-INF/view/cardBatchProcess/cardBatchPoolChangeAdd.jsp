@@ -59,7 +59,7 @@
 </div>
 <script>
 	$("#submit_btn").click(function() {
-		$("#form_sample_1").attr("action", "./batchCardStockIn");
+		$("#form_sample_1").attr("action", "./batchPoolChange");
 		if ($('#form_sample_1').valid()) {
 			App.Ajax.submit('form_sample_1', {
 				fn : function(json) {

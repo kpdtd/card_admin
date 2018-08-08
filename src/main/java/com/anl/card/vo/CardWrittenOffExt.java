@@ -5,6 +5,9 @@ import com.anl.card.persistence.po.CardWrittenOff;
 import com.anl.card.persistence.po.SupplierPool;
 
 public class CardWrittenOffExt extends CardWrittenOff{
+	public CardWrittenOffExt(){
+		
+	}
 
 	public CardWrittenOffExt(Card card) {
 	    super(card);

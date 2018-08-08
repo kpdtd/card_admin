@@ -2,7 +2,9 @@ package com.anl.card.controller;
 
 import java.util.*;
 
+import com.anl.card.constant.Constant;
 import com.anl.card.persistence.po.SelectGroup;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +30,7 @@ public class ChannelController extends BaseController {
 	
 	@RequestMapping("getPage")
 	public String getPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+		request.setAttribute("menu", Constant.MENU_CHANNEL);
 		return "channel/channel";
 	}
 	

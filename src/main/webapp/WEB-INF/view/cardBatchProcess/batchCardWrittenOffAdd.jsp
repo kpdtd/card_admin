@@ -59,7 +59,7 @@
 </div>
 <script>
 	$("#submit_btn").click(function() {
-		$("#form_sample_1").attr("action", "./batchChangeCardOwner");
+		$("#form_sample_1").attr("action", "./batchCardWrittenOff");
 		if ($('#form_sample_1').valid()) {
 			App.Ajax.submit('form_sample_1', {
 				fn : function(json) {

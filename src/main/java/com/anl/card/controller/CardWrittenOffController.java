@@ -1,13 +1,15 @@
 package com.anl.card.controller;
 
-import com.anl.card.persistence.po.CardWrittenOff;
-import com.anl.card.persistence.po.SelectGroup;
-import com.anl.card.persistence.po.Supplier;
-import com.anl.card.service.CardWrittenOffService;
-import com.anl.card.service.SupplierService;
-import com.anl.card.util.DateUtil;
-import com.anl.card.util.FileUtils;
-import com.anl.card.vo.CardWrittenOffExt;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -19,14 +21,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import com.anl.card.constant.Constant;
+import com.anl.card.persistence.po.CardOwner;
+import com.anl.card.persistence.po.CardWrittenOff;
+import com.anl.card.persistence.po.SelectGroup;
+import com.anl.card.persistence.po.Supplier;
+import com.anl.card.persistence.po.SupplierPool;
+import com.anl.card.service.CardOwnerService;
+import com.anl.card.service.CardService;
+import com.anl.card.service.CardWrittenOffService;
+import com.anl.card.service.DataDictionaryService;
+import com.anl.card.service.SupplierPoolService;
+import com.anl.card.service.SupplierService;
+import com.anl.card.util.DateUtil;
+import com.anl.card.util.FileUtils;
+import com.anl.card.vo.CardExt;
+import com.anl.card.vo.CardWrittenOffExt;
 
 /**
  * 类名: CardWrittenOffController
@@ -36,70 +46,85 @@ import java.util.Objects;
 @Controller
 @RequestMapping("/cardWrittenOff")
 public class CardWrittenOffController extends BaseController {
-    @Autowired
-    CardWrittenOffService cardWrittenOffService;
-    @Autowired
-    SupplierService supplierService;
+	@Autowired
+	CardService cardService;
+	
+	@Autowired
+	SupplierService supplierService;
+
+	@Autowired
+	CardOwnerService cardOwnerService;
+
+	@Autowired
+	SupplierPoolService supplierPoolService;
+	
+	@Autowired
+	CardWrittenOffService cardWrittenOffService;
+
+	@Autowired
+	DataDictionaryService dataDictionaryService;
 
     @RequestMapping("getPage")
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        //查询出运营商列表,提供给查询栏下拉列表使用
-        List<Supplier> supplierList = supplierService.getListByMap(new HashMap<>());
-        request.setAttribute("supplierList", supplierList);
-        List<SelectGroup> cardStateList = dataDictionaryService.getValueListByKey("CARD_STATE_LIST");
-        request.setAttribute("cardStateList", cardStateList);
+		request.setAttribute("menu", Constant.MENU_WRITTEN_OFF);
+		// 获取运营商列表
+		List<Supplier> supplierList = supplierService.getListByMap(new HashMap<String, Object>());
+		request.setAttribute("supplierList", supplierList);
+		// 获取归属方列表
+		List<CardOwner> cardOwnerList = cardOwnerService.getListByMap(new HashMap<String, Object>());
+		request.setAttribute("cardOwnerList", cardOwnerList);
+		// 获取套餐列表
+		List<SupplierPool> supplierPoolList = supplierPoolService.getListByMap(new HashMap<String, Object>());
+		request.setAttribute("supplierPoolList", supplierPoolList);
+		// 获取卡状态列表
+		List<SelectGroup> cardStateList = dataDictionaryService.getValueListByKey("CARD_STATE_LIST");
+		request.setAttribute("cardStateList", cardStateList);
         return "cardWrittenOff/cardWrittenOff";
     }
 
     @RequestMapping("getList")
     @ResponseBody
     public void getList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        //获取查询条件过来的参数
-        String startTime = request.getParameter("startTime");
-        String endTime = request.getParameter("endTime");
-        String supplierId = request.getParameter("supplierId");
-        String cardState = request.getParameter("cardState");
-        String iccid = request.getParameter("iccid");
-        Map<String, Object> model = new HashMap<String, Object>();
-        if (StringUtils.isNotBlank(startTime)) {
-            model.put("startTime", startTime);
-        }
-        if (StringUtils.isNotBlank(endTime)) {
-            model.put("endTime", endTime);
-        }
-        if (StringUtils.isNotBlank(supplierId)) {
-            model.put("supplierId", Integer.parseInt(supplierId));
-        }
-        if (StringUtils.isNotBlank(iccid)) {
-            model.put("iccid", iccid);
-        }
-        if (StringUtils.isNotBlank(cardState)) {
-            model.put("cardState", Integer.parseInt(cardState));
-        }
-        pageProperties(request, response, model);
-        int count = cardWrittenOffService.count(model);
-        recordsTotal = count;
-        // 分页显示上面查询出的数据结果
-        List<CardWrittenOffExt> data = cardWrittenOffService.getListByCondition(model);
-        recordsFiltered = recordsTotal;
-        recordsDisplay = data.size();
-        //查询出运营商列表,提供给查询栏下拉列表使用
-        List<Supplier> supplierList = supplierService.getListByMap(new HashMap<>());
-        request.setAttribute("supplierList", supplierList);
-        List<SelectGroup> cardStateList = dataDictionaryService.getValueListByKey("CARD_STATE_LIST");
-        request.setAttribute("cardStateList", cardStateList);
-        this.writerToClient(data, response);
-    }
-
-	/*@RequestMapping("detail")
-    public String detail() throws Exception {
-		String id = request.getParameter("id");
-		if (StringUtils.isNotBlank(id)) {
-			CardWrittenOff cardWrittenOff = cardWrittenOffService.getById(Integer.parseInt(id));
-			request.setAttribute("cardWrittenOff", cardWrittenOff);
+		String iccid = request.getParameter("iccid");
+		String supplierId = request.getParameter("supplierId");
+		String cardOwnerId = request.getParameter("cardOwnerId");
+		String cardState = request.getParameter("cardState");
+		String startTime = request.getParameter("startTime");
+		String endTime = request.getParameter("endTime");
+		Map<String, Object> model = new HashMap<String, Object>();
+		if(StringUtils.isNotBlank(iccid)) {
+			if(iccid.length() == 20){
+				model.put("iccid", iccid);
+			}else if(iccid.length() == 15 && iccid.startsWith("46")){
+				model.put("imsi", iccid);//46开头的说明是imsi
+			}else if(iccid.length() == 11 || iccid.length() == 13){
+				model.put("msisdn", iccid);//46开头的说明是msisdn
+			}
 		}
-		return "cardWrittenOff/detail";
-	}*/
+		if(StringUtils.isNotBlank(supplierId)) {
+			model.put("supplierId", supplierId);
+		}
+		if(StringUtils.isNotBlank(cardOwnerId)) {
+			model.put("cardOwnerId", cardOwnerId);
+		}
+		if(StringUtils.isNotBlank(cardState)) {
+			model.put("cardState", cardState);
+		}
+		if(StringUtils.isNotBlank(startTime)) {
+			model.put("startTime", startTime);
+		}
+		if(StringUtils.isNotBlank(endTime)) {
+			model.put("endTime", endTime);
+		}
+		pageProperties(request, response, model);
+		int count = cardWrittenOffService.count(model);
+		recordsTotal = count;
+		// 分页显示上面查询出的数据结果
+		List<CardWrittenOffExt> data = cardWrittenOffService.getListByCondition(model);
+		recordsFiltered = recordsTotal;
+		recordsDisplay = data.size();
+		this.writerToClient(data, response);
+    }
 
     @RequestMapping("add")
     public String add(HttpServletRequest request, HttpServletResponse response, Integer id) throws Exception {

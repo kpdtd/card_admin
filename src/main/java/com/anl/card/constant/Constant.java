@@ -23,7 +23,13 @@ public class Constant {
 	 /*********菜单定义管理*************/
 	public static final String MENU_STRING = "menu";// 控制左侧菜单显示效果
 	public static final String MENU_CARD = "card";// 控制左侧菜单显示效果
-	public static final String MENU_SUPPLIER = "supplier";
+	public static final String MENU_CARD_STOCK = "cardStock";//卡库存管理
+	public static final String MENU_SUPPLIER = "supplier";//上游运营商--卡提供商
+	public static final String MENU_SUPPLIER_POOL = "supplierPool";//卡套餐/流量池
+	public static final String MENU_CARD_OWNER = "cardOwner";//卡归属方
+	public static final String MENU_CHANNEL = "channel";//卡渠道管理
+	public static final String MENU_WRITTEN_OFF = "cardWrittenOff";//卡注销管理
+	public static final String MENU_CARD_BATCH_PROCESS = "cardBatchProcess";//卡注销管理
 	public static final String MENU_DICTIONARY = "dictionary";
 	
 	/***********  批量动作定义  ***********/
