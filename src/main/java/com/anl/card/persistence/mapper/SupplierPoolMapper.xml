@@ -3,7 +3,7 @@
 
 
 <mapper namespace="com.anl.card.persistence.mapper.SupplierPoolMapper">
-    
+
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
     <![CDATA[
         INSERT INTO t_supplier_pool (
@@ -11,6 +11,7 @@
         	supplier_id,
         	pool_name,
         	pool_value,
+        	pool_code,
         	card_number,
         	pool_used,
         	threshold,
@@ -31,49 +32,52 @@
 	</insert>
 
 	<update id="update" parameterType="com.anl.card.persistence.po.SupplierPool">
-        UPDATE t_supplier_pool 
+		UPDATE t_supplier_pool
 		<set>
-	        <if test="supplierId != null">
-	        	supplier_id = #{supplierId},
-	        </if>
-	        <if test="poolName != null">
-	        	pool_name = #{poolName},
-	        </if>
-	        <if test="poolValue != null">
-	        	pool_value = #{poolValue},
-	        </if>
-	        <if test="cardNumber != null">
-	        	card_number = #{cardNumber},
-	        </if>
-	        <if test="poolUsed != null">
-	        	pool_used = #{poolUsed},
-	        </if>
-	        <if test="threshold != null">
-	        	threshold = #{threshold},
-	        </if>
-	        <if test="createTime != null">
-	        	create_time = #{createTime},
-	        </if>
-	        <if test="updateTime != null">
-	        	update_time = #{updateTime}
-	        </if>
-	    </set>
-        WHERE
-	        id = #{id}
+			<if test="supplierId != null">
+				supplier_id = #{supplierId},
+			</if>
+			<if test="poolName != null">
+				pool_name = #{poolName},
+			</if>
+			<if test="poolValue != null">
+				pool_value = #{poolValue},
+			</if>
+			<if test="poolCode != null">
+				pool_code = #{poolCode},
+			</if>
+			<if test="cardNumber != null">
+				card_number = #{cardNumber},
+			</if>
+			<if test="poolUsed != null">
+				pool_used = #{poolUsed},
+			</if>
+			<if test="threshold != null">
+				threshold = #{threshold},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime}
+			</if>
+		</set>
+		WHERE
+		id = #{id}
 	</update>
 
 	<delete id="deleteById">
-        DELETE FROM t_supplier_pool WHERE
-        id = #{id}
+		DELETE FROM t_supplier_pool WHERE
+		id = #{id}
 	</delete>
 
 	<select id="getById" resultType="com.anl.card.persistence.po.SupplierPool">
 		SELECT
-			*
+		*
 		FROM
-			t_supplier_pool 
-	    WHERE
-	        id = #{id} 
+		t_supplier_pool
+		WHERE
+		id = #{id}
 	</select>
 
 	<!-- 查询条件where,如果有时间范围查询，参数必须是startTime 和 endTime -->
@@ -90,6 +94,9 @@
 			</if>
 			<if test="poolValue != null">
 				AND pool_value = #{poolValue}
+			</if>
+			<if test="poolCode != null">
+				AND pool_code = #{poolCode}
 			</if>
 			<if test="cardNumber != null">
 				AND card_number = #{cardNumber}
@@ -115,7 +122,7 @@
 			</if>
 		</where>
 	</sql>
-	
+
 	<sql id="whereForPo">
 		<where>
 			<if test="id != null">
@@ -130,6 +137,9 @@
 			<if test="poolValue != null">
 				AND pool_value = #{poolValue}
 			</if>
+			<if test="poolCode != null">
+				AND pool_code = #{poolCode}
+			</if>			
 			<if test="cardNumber != null">
 				AND card_number = #{cardNumber}
 			</if>
@@ -140,33 +150,36 @@
 				AND threshold = #{threshold}
 			</if>
 		</where>
-	</sql>	
+	</sql>
 
 	<select id="count" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) FROM t_supplier_pool
 		<include refid="where" />
 	</select>
 
-	<select id="getListByMap" parameterType="java.util.Map" resultType="com.anl.card.persistence.po.SupplierPool">
-		SELECT 
-			*
+	<select id="getListByMap" parameterType="java.util.Map"
+		resultType="com.anl.card.persistence.po.SupplierPool">
+		SELECT
+		*
 		FROM
-			t_supplier_pool 
-	    <include refid="where" />
+		t_supplier_pool
+		<include refid="where" />
 		<if test="startPage!= null">
-			limit #{startPage}, #{pageSize} 
-		</if>	
-	</select>
-	
-	<select id="getListByPo" parameterType="com.anl.card.persistence.po.SupplierPool" resultType="com.anl.card.persistence.po.SupplierPool">
-		SELECT 
-			*
-		FROM 
-			t_supplier_pool 
-	    <include refid="whereForPo" />
+			limit #{startPage}, #{pageSize}
+		</if>
 	</select>
 
-	<select id="getListByCondition" parameterType="java.util.Map" resultType="com.anl.card.vo.SupplierPoolExt">
+	<select id="getListByPo" parameterType="com.anl.card.persistence.po.SupplierPool"
+		resultType="com.anl.card.persistence.po.SupplierPool">
+		SELECT
+		*
+		FROM
+		t_supplier_pool
+		<include refid="whereForPo" />
+	</select>
+
+	<select id="getListByCondition" parameterType="java.util.Map"
+		resultType="com.anl.card.vo.SupplierPoolExt">
 		SELECT
 		a.*,b.company as supplierName
 		FROM

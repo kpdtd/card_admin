@@ -1,8 +1,10 @@
 package com.anl.card.controller;
 
+import com.anl.card.constant.Constant;
 import com.anl.card.persistence.po.*;
 import com.anl.card.service.*;
 import com.anl.card.vo.UserExt;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +46,7 @@ public class UserController extends BaseController {
 
     @RequestMapping("getPage")
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    	request.setAttribute("menu", Constant.MENU_USER);
         //准备查询条件,渠道list
         List<Channel> channelList = channelService.getListByMap(new HashMap<>());
         request.setAttribute("channelList", channelList);

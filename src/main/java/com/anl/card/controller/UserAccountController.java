@@ -2,9 +2,11 @@ package com.anl.card.controller;
 
 import java.util.*;
 
+import com.anl.card.constant.Constant;
 import com.anl.card.persistence.po.UserAccountChangeHistory;
 import com.anl.card.service.UserAccountChangeHistoryService;
 import com.anl.card.vo.UserAccountExt;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +33,7 @@ public class UserAccountController extends BaseController {
 	UserAccountChangeHistoryService userAccountChangeHistoryService;
 	@RequestMapping("getPage")
 	public String getPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+		request.setAttribute("menu", Constant.MENU_USER_ACCOUNT);
 		return "userAccount/userAccount";
 	}
 	

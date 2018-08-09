@@ -30,6 +30,8 @@ public class Constant {
 	public static final String MENU_CHANNEL = "channel";//卡渠道管理
 	public static final String MENU_WRITTEN_OFF = "cardWrittenOff";//卡注销管理
 	public static final String MENU_CARD_BATCH_PROCESS = "cardBatchProcess";//卡注销管理
+	public static final String MENU_USER = "user";//用户信息
+	public static final String MENU_USER_ACCOUNT = "userAccount";//用户信息
 	public static final String MENU_DICTIONARY = "dictionary";
 	
 	/***********  批量动作定义  ***********/

@@ -116,9 +116,6 @@
 				<li id="flowPacketDefinition">
 					<a href="<%=request.getContextPath()%>/flowPacketDefinition/getPage">流量包信息</a>
 				</li>
-				<li id="goodsActivity">
-					<a href="<%=request.getContextPath()%>/goodsActivity/getPage">活动列表信息</a>
-				</li>
 			</ul>
 		</li>
 
@@ -136,8 +133,31 @@
 				<li id="cardBatchProcess">
 					<a class="" href="<%=request.getContextPath()%>/cardBatchProcess/getPage"> 卡批量管理</a>
 				</li>
+			</ul>
+		</li>
+		<li class="">
+			<a href="javascript:;">
+				<i class=" icon-list-ul"></i> <span class="title">营销活动管理</span> <span class="arrow"></span>
+			</a>
+			<ul class="sub-menu">
 				<li>
 					<a class="" href="<%=request.getContextPath()%>/cashCouponDefinition/getPage">优惠券管理</a>
+				</li>
+				<li id="goodsActivity">
+					<a href="<%=request.getContextPath()%>/goodsActivity/getPage">活动列表信息</a>
+				</li>
+			</ul>
+		</li>
+		<li class="">
+			<a href="javascript:;">
+				<i class=" icon-list-ul"></i> <span class="title">客服管理</span> <span class="arrow"></span>
+			</a>
+			<ul class="sub-menu">
+				<li id="column">
+					<a class="" href="<%=request.getContextPath()%>/customerService/getPage">用户问题工单</a>
+				</li>
+				<li id="dictionary">
+					<a href="<%=request.getContextPath()%>/customerService/getPage">用户综合信息</a>
 				</li>
 			</ul>
 		</li>

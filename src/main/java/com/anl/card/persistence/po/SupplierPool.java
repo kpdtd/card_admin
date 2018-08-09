@@ -7,6 +7,7 @@ public class SupplierPool {
 	private Integer supplierId;
 	private String poolName;
 	private Integer poolValue;
+	private String poolCode;
 	private Integer cardNumber;
 	private Integer poolUsed;
 	private Integer threshold;
@@ -75,6 +76,14 @@ public class SupplierPool {
 	
 	public Date getUpdateTime() {
 		return this.updateTime;
+	}
+
+	public String getPoolCode() {
+		return poolCode;
+	}
+
+	public void setPoolCode(String poolCode) {
+		this.poolCode = poolCode;
 	}
 }
 
