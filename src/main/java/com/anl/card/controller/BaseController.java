@@ -35,7 +35,7 @@ public class BaseController {
 	protected int recordsTotal; // 总记录数
 	protected int recordsFiltered; //
 	protected int recordsDisplay; //
-	protected HttpSession session;
+//	protected HttpSession session;
 	public static final boolean SUCCESS = true;
 	public static final boolean FAIL = false;
 	@Autowired(required = true)

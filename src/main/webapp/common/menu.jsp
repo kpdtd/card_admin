@@ -131,7 +131,7 @@
 					<a class="" href="<%=request.getContextPath()%>/cardWrittenOff/getPage"> 卡注销管理</a>
 				</li>
 				<li id="cardBatchProcess">
-					<a class="" href="<%=request.getContextPath()%>/cardBatchProcess/getPage"> 卡批量管理</a>
+					<a class="" href="<%=request.getContextPath()%>/cardBatchProcess/getPage"> 卡批量操作</a>
 				</li>
 			</ul>
 		</li>
@@ -158,6 +158,22 @@
 				</li>
 				<li id="dictionary">
 					<a href="<%=request.getContextPath()%>/customerService/getPage">用户综合信息</a>
+				</li>
+			</ul>
+		</li>
+		<li class="">
+			<a href="javascript:;">
+				<i class=" icon-list-ul"></i> <span class="title">定时任务管理</span> <span class="arrow"></span>
+			</a>
+			<ul class="sub-menu">
+				<li id="autoTaskDefinition">
+					<a class="" href="<%=request.getContextPath()%>/autoTaskDefinition/getPage">定时任务配置</a>
+				</li>
+				<li id="autoTaskExecHistory">
+					<a href="<%=request.getContextPath()%>/autoTaskExecHistory/getPage">执行结果监控</a>
+				</li>
+				<li id="">
+					<a href="<%=request.getContextPath()%>/customerService/getPage">失败任务处理</a>
 				</li>
 			</ul>
 		</li>

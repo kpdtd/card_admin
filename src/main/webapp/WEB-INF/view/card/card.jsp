@@ -103,7 +103,7 @@
 										<!-- <strong style="color: red"> 重要说明1<br /> 重要说明2<br /></strong> -->
 									</div>
 									<!-- </div> -->
-									<div class="row-fluid" style="overflow-x: auto; width: 950">
+									<div class="row-fluid" style="overflow-x: auto; width: 950"> <!-- 自动横向滚动条，必须设定宽度 及 overflow-x -->
 										<!-- 指定宽度可以出现横向滚动条  -->
 										<table style="table-layout: fixed"
 											class="table table-striped table-bordered table-hover table-full-width dataTable" id="portlet_Tables"
