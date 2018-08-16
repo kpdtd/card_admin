@@ -31,13 +31,6 @@
                     </c:forEach>
                 </select>
             </div>
-            <div class="control-group">
-                <label class="control-label" for="firstName"><span class="required">*</span> 企业编码</label>
-                <div class="controls">
-                    <input type="text" class="m-wrap span10" name="ecCode"
-                           value="${supplierInterfaceItem.ecCode}">
-                </div>
-            </div>
 
             <label class="control-label" for="firstName"><span
                     class="required">*</span>选择接口</label>
@@ -107,8 +100,6 @@
     App.validate('form_sample_1', {
         rules: {
             "supplierId": {
-                required: true
-            }, "ecCode": {
                 required: true
             }, "interfaceId": {
                 required: true

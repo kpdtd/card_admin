@@ -5,9 +5,9 @@ import java.util.*;
 public class SupplierInterfaceItem {
 	private Integer id;
 	private Integer supplierId;
-	private String ecCode;
+	//private String ecCode;
 	private Integer interfaceId;
-	private String interfaceTag;
+	private String interfaceInfo;
 	private String className;
 	private String url;
 	private Date createTime;
@@ -26,13 +26,7 @@ public class SupplierInterfaceItem {
 	public Integer getSupplierId() {
 		return this.supplierId;
 	}
-	public void setEcCode(String value) {
-		this.ecCode = value;
-	}
-	
-	public String getEcCode() {
-		return this.ecCode;
-	}
+
 	public void setInterfaceId(Integer value) {
 		this.interfaceId = value;
 	}
@@ -40,13 +34,7 @@ public class SupplierInterfaceItem {
 	public Integer getInterfaceId() {
 		return this.interfaceId;
 	}
-	public void setInterfaceTag(String value) {
-		this.interfaceTag = value;
-	}
-	
-	public String getInterfaceTag() {
-		return this.interfaceTag;
-	}
+
 	public void setClassName(String value) {
 		this.className = value;
 	}
@@ -67,6 +55,14 @@ public class SupplierInterfaceItem {
 	
 	public Date getCreateTime() {
 		return this.createTime;
+	}
+
+	public String getInterfaceInfo() {
+		return interfaceInfo;
+	}
+
+	public void setInterfaceInfo(String interfaceInfo) {
+		this.interfaceInfo = interfaceInfo;
 	}
 }
 

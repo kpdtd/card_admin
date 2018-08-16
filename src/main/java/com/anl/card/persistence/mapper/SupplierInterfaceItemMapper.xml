@@ -9,18 +9,16 @@
         INSERT INTO t_supplier_interface_item (
         	id,
         	supplier_id,
-        	ec_code,
         	interface_id,
-        	interface_tag,
+        	interface_info,
         	class_name,
         	url,
         	create_time
         ) VALUES (
         	#{id},
         	#{supplierId},
-        	#{ecCode},
         	#{interfaceId},
-        	#{interfaceTag},
+        	#{interfaceInfo},
         	#{className},
         	#{url},
         	#{createTime}
@@ -34,14 +32,11 @@
 	        <if test="supplierId != null">
 	        	supplier_id = #{supplierId},
 	        </if>
-	        <if test="ecCode != null">
-	        	ec_code = #{ecCode},
-	        </if>
 	        <if test="interfaceId != null">
 	        	interface_id = #{interfaceId},
 	        </if>
-	        <if test="interfaceTag != null">
-	        	interface_tag = #{interfaceTag},
+	        <if test="interfaceInfo != null">
+	        	interface_info = #{interfaceInfo},
 	        </if>
 	        <if test="className != null">
 	        	class_name = #{className},
@@ -80,14 +75,11 @@
 			<if test="supplierId != null">
 				AND supplier_id = #{supplierId}
 			</if>
-			<if test="ecCode != null">
-				AND ec_code = #{ecCode}
-			</if>
 			<if test="interfaceId != null">
 				AND interface_id = #{interfaceId}
 			</if>
-			<if test="interfaceTag != null">
-				AND interface_tag = #{interfaceTag}
+			<if test="interfaceInfo != null">
+				AND interface_info = #{interfaceInfo}
 			</if>
 			<if test="className != null">
 				AND class_name = #{className}
@@ -116,14 +108,11 @@
 			<if test="supplierId != null">
 				AND supplier_id = #{supplierId}
 			</if>
-			<if test="ecCode != null">
-				AND ec_code = #{ecCode}
-			</if>
 			<if test="interfaceId != null">
 				AND interface_id = #{interfaceId}
 			</if>
-			<if test="interfaceTag != null">
-				AND interface_tag = #{interfaceTag}
+			<if test="interfaceInfo != null">
+				AND interface_info = #{interfaceInfo}
 			</if>
 			<if test="className != null">
 				AND class_name = #{className}
