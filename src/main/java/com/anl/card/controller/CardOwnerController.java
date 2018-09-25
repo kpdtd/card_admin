@@ -30,7 +30,7 @@ public class CardOwnerController extends BaseController {
 
 	@RequestMapping("getPage")
 	public String getPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setAttribute("menu", Constant.MENU_CARD_OWNER);
+		request.setAttribute(Constant.MENU_STRING, Constant.MENU_CARD_OWNER);
 		List<SelectGroup> stateList = dataDictionaryService.getValueListByKey("PUBLISH_STATE");
 		request.setAttribute("stateList", stateList);
 		return "cardOwner/cardOwner";

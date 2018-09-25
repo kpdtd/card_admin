@@ -88,7 +88,7 @@ public class CardBatchProcessController extends BaseController {
 	 */
 	@RequestMapping("getPage")
 	public String getPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setAttribute("menu", Constant.MENU_CARD_BATCH_PROCESS);
+		request.setAttribute(Constant.MENU_STRING, Constant.MENU_CARD_BATCH_PROCESS);
 		return "cardBatchProcess/cardBatchProcess";
 	}
 

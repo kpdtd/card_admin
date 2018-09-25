@@ -2,6 +2,7 @@ package com.anl.card.controller;
 
 import java.util.*;
 
+import com.anl.card.constant.Constant;
 import com.anl.card.persistence.po.InterfaceList;
 import com.anl.card.persistence.po.Supplier;
 import com.anl.card.service.InterfaceListService;
@@ -37,6 +38,7 @@ public class SupplierInterfaceItemController extends BaseController {
 	public String getPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		List<Supplier> supplierList =  supplierService.getListByMap(new HashMap<>());
 		request.setAttribute("supplierList",supplierList);
+		request.setAttribute(Constant.MENU_STRING, Constant.MENU_SUPPLIER_INTERFACE_ITEM);
 		return "supplierInterfaceItem/supplierInterfaceItem";
 	}
 	
@@ -95,7 +97,7 @@ public class SupplierInterfaceItemController extends BaseController {
 			//set tag
 			InterfaceList interfaceList=interfaceListService.getById(supplierInterfaceItem.getInterfaceId());
 			if(interfaceList!=null){
-				supplierInterfaceItem.setInterfaceTag(interfaceList.getTag());
+				supplierInterfaceItem.setInterfaceId(interfaceList.getId());
 			}
 			if (Objects.isNull(supplierInterfaceItem.getId())) {
 				supplierInterfaceItem.setCreateTime(new Date());

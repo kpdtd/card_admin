@@ -39,6 +39,7 @@ public class AutoTaskDefinitionController extends BaseController {
 
 	@RequestMapping("getPage")
 	public String getPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
 		request.setAttribute(Constant.MENU_STRING, Constant.MENU_AUTO_TASK_DEFINITION);
 		return "autoTaskDefinition/autoTaskDefinition";
 	}

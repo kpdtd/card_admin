@@ -2,6 +2,7 @@ package com.anl.card.controller;
 
 import java.util.*;
 
+import com.anl.card.constant.Constant;
 import com.anl.card.persistence.po.SelectGroup;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ public class CashCouponDefinitionController extends BaseController {
 		request.setAttribute("ruleList",ruleList);
 		List<SelectGroup> typeList = dataDictionaryService.getValueListByKey("CASH_COUPON_TYPE");
 		request.setAttribute("typeList",typeList);
+		request.setAttribute(Constant.MENU_STRING, Constant.MENU_CASH_COUPON_DEFINITION);
 		return "cashCouponDefinition/cashCouponDefinition";
 	}
 	

@@ -42,7 +42,7 @@ public class SupplierPoolController extends BaseController {
     CardService cardService;
     @RequestMapping("getPage")
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-    	request.setAttribute("menu", Constant.MENU_SUPPLIER_POOL);
+    	request.setAttribute(Constant.MENU_STRING, Constant.MENU_SUPPLIER_POOL);
         return "supplierPool/supplierPool";
     }
 

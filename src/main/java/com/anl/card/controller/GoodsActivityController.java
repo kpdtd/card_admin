@@ -2,6 +2,7 @@ package com.anl.card.controller;
 
 import java.util.*;
 
+import com.anl.card.constant.Constant;
 import com.anl.card.persistence.po.SelectGroup;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class GoodsActivityController extends BaseController {
 	
 	@RequestMapping("getPage")
 	public String getPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+		request.setAttribute(Constant.MENU_STRING, Constant.MENU_GOOD_ACTIVITY);
 		return "goodsActivity/goodsActivity";
 	}
 	

@@ -30,7 +30,7 @@ public class ChannelController extends BaseController {
 	
 	@RequestMapping("getPage")
 	public String getPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setAttribute("menu", Constant.MENU_CHANNEL);
+		request.setAttribute(Constant.MENU_STRING, Constant.MENU_CHANNEL);
 		return "channel/channel";
 	}
 	

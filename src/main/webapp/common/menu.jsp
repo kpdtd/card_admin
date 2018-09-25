@@ -88,6 +88,12 @@
 				<li id="channel">
 					<a class="" href="<%=request.getContextPath()%>/channel/getPage">推广渠道管理</a>
 				</li>
+				<li id="interfaceList">
+					<a class="" href="<%=request.getContextPath()%>/interfaceList/getPage">接口定义管理</a>
+				</li>
+				<li id="supplierInterfaceItem">
+					<a class="" href="<%=request.getContextPath()%>/supplierInterfaceItem/getPage">运营商接口管理</a>
+				</li>
 			</ul>
 		</li>
 		<li class="">
@@ -140,7 +146,7 @@
 				<i class=" icon-list-ul"></i> <span class="title">营销活动管理</span> <span class="arrow"></span>
 			</a>
 			<ul class="sub-menu">
-				<li>
+				<li id="cashCouponDefinition">
 					<a class="" href="<%=request.getContextPath()%>/cashCouponDefinition/getPage">优惠券管理</a>
 				</li>
 				<li id="goodsActivity">
@@ -153,10 +159,10 @@
 				<i class=" icon-list-ul"></i> <span class="title">客服管理</span> <span class="arrow"></span>
 			</a>
 			<ul class="sub-menu">
-				<li id="column">
+				<li>
 					<a class="" href="<%=request.getContextPath()%>/customerService/getPage">用户问题工单</a>
 				</li>
-				<li id="dictionary">
+				<li >
 					<a href="<%=request.getContextPath()%>/customerService/getPage">用户综合信息</a>
 				</li>
 			</ul>
@@ -173,7 +179,7 @@
 					<a href="<%=request.getContextPath()%>/autoTaskExecHistory/getPage">执行结果监控</a>
 				</li>
 				<li id="">
-					<a href="<%=request.getContextPath()%>/customerService/getPage">失败任务处理</a>
+					失败任务处理
 				</li>
 			</ul>
 		</li>

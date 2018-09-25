@@ -2,6 +2,7 @@ package com.anl.card.controller;
 
 import java.util.*;
 
+import com.anl.card.constant.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +26,8 @@ public class ChargeListController extends BaseController {
 	ChargeListService chargeListService;
 	
 	@RequestMapping("getPage")
-	public String getPage() throws Exception {
-		
+	public String getPage(HttpServletRequest request) throws Exception {
+		request.setAttribute(Constant.MENU_STRING, Constant.MENU_CHARGELIST);
 		return "chargeList/chargeList";
 	}
 	

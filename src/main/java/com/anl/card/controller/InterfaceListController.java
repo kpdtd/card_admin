@@ -2,6 +2,7 @@ package com.anl.card.controller;
 
 import java.util.*;
 
+import com.anl.card.constant.Constant;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,8 +27,8 @@ public class InterfaceListController extends BaseController {
 	InterfaceListService interfaceListService;
 	
 	@RequestMapping("getPage")
-	public String getPage() throws Exception {
-		
+	public String getPage(HttpServletRequest request) throws Exception {
+		request.setAttribute(Constant.MENU_STRING, Constant.MENU_INTERFACE_LIST);
 		return "interfaceList/interfaceList";
 	}
 	

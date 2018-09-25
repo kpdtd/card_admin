@@ -46,7 +46,7 @@ public class UserController extends BaseController {
 
     @RequestMapping("getPage")
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-    	request.setAttribute("menu", Constant.MENU_USER);
+    	request.setAttribute(Constant.MENU_STRING, Constant.MENU_USER);
         //准备查询条件,渠道list
         List<Channel> channelList = channelService.getListByMap(new HashMap<>());
         request.setAttribute("channelList", channelList);

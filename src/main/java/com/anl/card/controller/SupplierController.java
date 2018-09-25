@@ -38,7 +38,7 @@ public class SupplierController extends BaseController {
 	
 	@RequestMapping(value="getPage")
 	public String getPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setAttribute("menu", Constant.MENU_SUPPLIER);
+		request.setAttribute(Constant.MENU_STRING, Constant.MENU_SUPPLIER);
 		List<SelectGroup> stateList = dataDictionaryService.getValueListByKey("PUBLISH_STATE");
 		request.setAttribute("stateList",stateList);
 		return "supplier/supplier";

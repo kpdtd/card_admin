@@ -32,7 +32,7 @@ public class DictionaryController extends BaseController {
 	
 	@RequestMapping("getPage")
 	public String getPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setAttribute("menu", Constant.MENU_DICTIONARY);
+		request.setAttribute(Constant.MENU_STRING, Constant.MENU_DICTIONARY);
 		return "dictionary/dictionary";
 	}
 	

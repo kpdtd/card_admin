@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import com.anl.card.constant.Constant;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +31,7 @@ public class UserChargeRecordController extends BaseController {
 	
 	@RequestMapping("getPage")
 	public String getPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+		request.setAttribute(Constant.MENU_STRING, Constant.MENU_USER_CHARGERECORD);
 		return "userChargeRecord/userChargeRecord";
 	}
 	

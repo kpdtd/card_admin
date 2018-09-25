@@ -66,7 +66,7 @@ public class CardWrittenOffController extends BaseController {
 
     @RequestMapping("getPage")
     public String getPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setAttribute("menu", Constant.MENU_WRITTEN_OFF);
+		request.setAttribute(Constant.MENU_STRING, Constant.MENU_CARD_WRITTENOFF);
 		// 获取运营商列表
 		List<Supplier> supplierList = supplierService.getListByMap(new HashMap<String, Object>());
 		request.setAttribute("supplierList", supplierList);
