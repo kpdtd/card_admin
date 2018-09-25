@@ -50,7 +50,18 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.anl.card.persistence.mapper" />
 	</bean>
+	<!-- 这个是使用spring自带的任务时需要配置 -->
 	<task:annotation-driven />
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 	<!-- <import resource="spring-shiro.xml" /> -->
+
+	<!-- 使用quartz只需要定义bean工厂即可，属性都可以不设置 -->	
+	<bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" >
+        <property name="taskExecutor" ref="taskExecutor" />
+        <property name="autoStartup" value="false"/>
+    </bean>
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="4" />
+        <property name="maxPoolSize" value="16" />
+    </bean>
 </beans>
