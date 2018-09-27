@@ -130,7 +130,7 @@
 				<i class=" icon-list-ul"></i> <span class="title">卡信息管理</span> <span class="arrow"></span>
 			</a>
 			<ul class="sub-menu">
-				<li id="cardStock">
+				<li id="card">
 					<a class="" href="<%=request.getContextPath()%>/card/getPage"> 卡库存管理</a>
 				</li>
 				<li id="cardWrittenOff">

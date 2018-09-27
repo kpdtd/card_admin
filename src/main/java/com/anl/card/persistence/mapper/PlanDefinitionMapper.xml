@@ -46,6 +46,9 @@
 	        <if test="name != null">
 	        	name = #{name},
 	        </if>
+			<if test="code!=null">
+				code = #{code},
+			</if>
 	        <if test="subName != null">
 	        	sub_name = #{subName},
 	        </if>
@@ -81,14 +84,12 @@
 	        </if>
 	    </set>
         WHERE
-	        id = #{id},
-	        code = #{code}
+	        id = #{id}
 	</update>
 
 	<delete id="deleteById">
         DELETE FROM t_plan_definition WHERE
-        id = #{id},
-        code = #{code}
+        id = #{id}
 	</delete>
 
 	<select id="getById" resultType="com.anl.card.persistence.po.PlanDefinition">
