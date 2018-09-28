@@ -107,6 +107,9 @@
 				<li id="userAccount">
 					<a href="<%=request.getContextPath()%>/userAccount/getPage">用户账户信息</a>
 				</li>
+				<li id="userFlowUsedDay">
+					<a href="<%=request.getContextPath()%>/userFlowUsedDay/getPage">用户流量日使用量</a>
+				</li>
 				<li id="userChargeRecord">
 					<a href="<%=request.getContextPath()%>/userChargeRecord/getPage">用户支付订单信息</a>
 				</li>

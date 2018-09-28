@@ -43,6 +43,8 @@ public class Constant {
     public static final String MENU_PLAN_DEFINITION = "planDefinition";
     //流量包信息
     public static final String MENU_FLOW_PACKET_DEFINITION = "flowPacketDefinition";
+    //日使用流量
+    public static final String MENU_USER_FLOW_USED_DAY = "userFlowUsedDay";
     //卡信息管理
     //卡库存管理
     public static final String MENU_CARD = "card";

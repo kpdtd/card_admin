@@ -8,6 +8,14 @@ public class UserPlanExt extends UserPlan{
 
 	private String planName;
 
+	@Override
+	public String getPlanName() {
+		return planName;
+	}
 
+	@Override
+	public void setPlanName(String planName) {
+		this.planName = planName;
+	}
 }
 
