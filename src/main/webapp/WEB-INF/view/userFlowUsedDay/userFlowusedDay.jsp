@@ -56,9 +56,9 @@
 										<%-- <shiro:hasPermission name="/dictionary/add">   --%>
 										<input class="m-wrap medium" size="10" id="iccid" type="text" placeholder="iccid">
 										<input type="text" class="m-wrap xsmall form_date" id="startTime" value=""
-											   pattern="yyyy-MM-dd" placeholder="支付开始时间">
+											   pattern="yyyy-MM-dd" placeholder="创建开始时间">
 										<input type="text" class="m-wrap xsmall form_date" id="endTime" value=""
-											   pattern="yyyy-MM-dd" placeholder="支付结束时间">
+											   pattern="yyyy-MM-dd" placeholder="创建结束时间">
 										<button onclick="initPage();" class="btn red">
 											<i class="icon-search"></i> 查询
 										</button>
