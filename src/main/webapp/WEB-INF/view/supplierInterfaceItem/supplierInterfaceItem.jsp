@@ -78,7 +78,6 @@
                                             <th> id</th>
                                             <th> 上游名称</th>
                                             <th> 接口名称</th>
-                                            <th> 接口标识</th>
                                             <th> 执行类</th>
                                             <th> 调用地址</th>
                                             <th> 创建时间</th>
@@ -154,16 +153,6 @@
             }, {
                 "sClass": "center",
                 "mDataProp": "interfaceName",
-                "mRender": function (obj) {
-                    if (obj == null) {
-                        return "";
-                    } else {
-                        return obj;
-                    }
-                }
-            }, {
-                "sClass": "center",
-                "mDataProp": "interfaceTag",
                 "mRender": function (obj) {
                     if (obj == null) {
                         return "";
